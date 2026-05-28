@@ -1,0 +1,38 @@
+/* ── Modern City · 未来都市 ─────────────────────────────────────────────────
+   Palette: deep-space grey, midnight blue, tech cyan, micro-silver
+   Feel: frosted glass, brushed metal, cool city luminescence
+   ─────────────────────────────────────────────────────────────────────────── */
+
+[data-theme="modern-city"] {
+  /* surfaces */
+  --color-bg:            #060a0f;
+  --color-surface:       #0c1219;
+  --color-surface-2:     #121b24;
+
+  /* text */
+  --color-text-primary:   #e4ecf5;
+  --color-text-secondary: #8599b4;
+  --color-text-muted:     #3c5068;
+
+  /* accent — tech cyan */
+  --color-accent:         #4db8c9;
+  --color-accent-dim:     rgba(77, 184, 201, 0.10);
+
+  /* borders */
+  --color-border:         rgba(77, 184, 201, 0.08);
+  --color-border-strong:  rgba(77, 184, 201, 0.22);
+
+  /* atmosphere */
+  --color-particle:       rgba(77, 184, 201, 0.06);
+  --color-glow:           rgba(77, 184, 201, 0.03);
+
+  /* navbar bg on scroll */
+  --color-nav-bg:         rgba(6, 10, 15, 0.93);
+
+  /* scrollbar */
+  --color-scrollbar:      rgba(77, 184, 201, 0.2);
+}
+
+[data-theme="modern-city"] ::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+}

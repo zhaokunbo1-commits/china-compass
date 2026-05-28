@@ -1,0 +1,38 @@
+/* ── Silkroad · 丝路敦煌 ────────────────────────────────────────────────────
+   Palette: Gobi camel-gold, ochre red, dark brown-grey, fresco cyan-blue
+   Feel: sandstone warmth, aged silk, candlelit desert nights
+   ─────────────────────────────────────────────────────────────────────────── */
+
+[data-theme="silkroad"] {
+  /* surfaces */
+  --color-bg:            #0d0a07;
+  --color-surface:       #14100c;
+  --color-surface-2:     #1d1710;
+
+  /* text */
+  --color-text-primary:   #f0e6d3;
+  --color-text-secondary: #b8a08a;
+  --color-text-muted:     #6b5a47;
+
+  /* accent — camel gold */
+  --color-accent:         #c9a050;
+  --color-accent-dim:     rgba(201, 160, 80, 0.12);
+
+  /* borders */
+  --color-border:         rgba(201, 160, 80, 0.10);
+  --color-border-strong:  rgba(201, 160, 80, 0.28);
+
+  /* atmosphere */
+  --color-particle:       rgba(201, 160, 80, 0.07);
+  --color-glow:           rgba(201, 160, 80, 0.04);
+
+  /* navbar bg on scroll */
+  --color-nav-bg:         rgba(13, 10, 7, 0.92);
+
+  /* scrollbar */
+  --color-scrollbar:      rgba(201, 160, 80, 0.2);
+}
+
+[data-theme="silkroad"] ::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+}

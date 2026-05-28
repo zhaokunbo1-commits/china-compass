@@ -1,0 +1,38 @@
+/* ── Nature & Landscape · 山河秘境 ──────────────────────────────────────────
+   Palette: mountain green, lake cyan, snow white, mist grey, forest indigo
+   Feel: morning mist, cool mountain air, translucent water reflections
+   ─────────────────────────────────────────────────────────────────────────── */
+
+[data-theme="nature-landscape"] {
+  /* surfaces */
+  --color-bg:            #070d0a;
+  --color-surface:       #0d1512;
+  --color-surface-2:     #121e1a;
+
+  /* text */
+  --color-text-primary:   #e6f0ea;
+  --color-text-secondary: #88aa98;
+  --color-text-muted:     #496b58;
+
+  /* accent — mountain sage-green */
+  --color-accent:         #68a888;
+  --color-accent-dim:     rgba(104, 168, 136, 0.10);
+
+  /* borders */
+  --color-border:         rgba(104, 168, 136, 0.08);
+  --color-border-strong:  rgba(104, 168, 136, 0.22);
+
+  /* atmosphere */
+  --color-particle:       rgba(104, 168, 136, 0.06);
+  --color-glow:           rgba(104, 168, 136, 0.03);
+
+  /* navbar bg on scroll */
+  --color-nav-bg:         rgba(7, 13, 10, 0.92);
+
+  /* scrollbar */
+  --color-scrollbar:      rgba(104, 168, 136, 0.2);
+}
+
+[data-theme="nature-landscape"] ::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+}

@@ -1,0 +1,38 @@
+/* ─── Theme Token Slots ─────────────────────────────────────────────────────
+   [data-theme="base"] → default dark look used on the homepage
+   All four named themes are defined in their own CSS files imported in layout.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+[data-theme="base"] {
+  /* surfaces */
+  --color-bg:            #0a0a0a;
+  --color-surface:       #111111;
+  --color-surface-2:     #1a1a1a;
+
+  /* text */
+  --color-text-primary:   #f5f5f0;
+  --color-text-secondary: #a0a09a;
+  --color-text-muted:     #5a5a55;
+
+  /* accent — neutral warm gold */
+  --color-accent:         #c8a96e;
+  --color-accent-dim:     rgba(200, 169, 110, 0.14);
+
+  /* borders */
+  --color-border:         rgba(255, 255, 255, 0.08);
+  --color-border-strong:  rgba(255, 255, 255, 0.18);
+
+  /* atmosphere */
+  --color-particle:       rgba(200, 169, 110, 0.05);
+  --color-glow:           rgba(200, 169, 110, 0.03);
+
+  /* navbar */
+  --color-nav-bg:         rgba(10, 10, 10, 0.92);
+
+  /* scrollbar */
+  --color-scrollbar:      rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="base"] ::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+}

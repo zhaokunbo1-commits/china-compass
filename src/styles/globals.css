@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+/* ─── Cinematic Base Variables ─────────────────────────────────────────────── */
+:root {
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --border-width: 1px;
+  --border-width-thick: 2px;
+
+  --anim-curve: cubic-bezier(0.16, 1, 0.3, 1);
+  --anim-fast: 0.4s;
+  --anim-base: 0.6s;
+  --anim-slow: 1s;
+
+  --letterspace-display: 0.15em;
+  --letterspace-sub: 0.08em;
+  --letterspace-body: 0.02em;
+
+  --vignette-strength: 60%;
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  letter-spacing: var(--letterspace-body);
+  overflow-x: hidden;
+}
+
+/* ─── Typography Scale ─────────────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-cinzel), var(--font-playfair), Georgia, serif;
+  letter-spacing: var(--letterspace-display);
+  font-weight: 400;
+}
+
+.font-display-bold {
+  font-family: var(--font-cinzel), var(--font-playfair), Georgia, serif;
+  letter-spacing: var(--letterspace-display);
+  font-weight: 700;
+}
+
+.font-sub {
+  font-family: var(--font-playfair), Georgia, serif;
+  letter-spacing: var(--letterspace-sub);
+}
+
+.font-body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  letter-spacing: var(--letterspace-body);
+}
+
+/* ─── Cinematic Layout ─────────────────────────────────────────────────────── */
+
+/* 21:9 ultra-wide hero container */
+.cinema-21-9 {
+  aspect-ratio: 21 / 9;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Letterbox bars (cinematic widescreen effect on mobile) */
+.cinema-letterbox::before,
+.cinema-letterbox::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: clamp(2px, 2.5vw, 40px);
+  background: #000;
+  z-index: 10;
+  pointer-events: none;
+}
+.cinema-letterbox::before { top: 0; }
+.cinema-letterbox::after  { bottom: 0; }
+
+/* Cinematic vignette overlay */
+.cinema-vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, var(--vignette-strength)) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ─── Mask Transition Base ─────────────────────────────────────────────────── */
+.mask-reveal {
+  clip-path: inset(0 100% 0 0);
+}
+.mask-reveal-active {
+  clip-path: inset(0 0% 0 0);
+  transition: clip-path var(--anim-slow) var(--anim-curve);
+}
+
+/* ─── Parallax Container ───────────────────────────────────────────────────── */
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* ─── Card Base ────────────────────────────────────────────────────────────── */
+.card-base {
+  border-radius: var(--radius-lg);
+  border: var(--border-width) solid transparent;
+  overflow: hidden;
+  transition:
+    transform var(--anim-fast) var(--anim-curve),
+    box-shadow var(--anim-fast) var(--anim-curve);
+  will-change: transform;
+}
+
+.card-base:hover {
+  transform: scale(1.035);
+}
+
+/* ─── Button Base ──────────────────────────────────────────────────────────── */
+.btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-md);
+  border: var(--border-width) solid transparent;
+  font-family: var(--font-cinzel), Georgia, serif;
+  letter-spacing: var(--letterspace-sub);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform var(--anim-fast) var(--anim-curve),
+    opacity var(--anim-fast) var(--anim-curve);
+  user-select: none;
+}
+
+.btn-base:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.btn-base:active {
+  transform: translateY(0);
+}
+
+/* ─── Divider ──────────────────────────────────────────────────────────────── */
+.divider-cinematic {
+  width: 60px;
+  height: var(--border-width-thick);
+  display: block;
+}
+
+/* ─── Theme Colour Transitions ─────────────────────────────────────────────
+   Only colour/border properties transition so hover/motion animations stay
+   at their own speeds and aren't slowed by the global transition duration.
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  --theme-transition: 0.5s ease;
+}
+
+body,
+footer,
+.card-base {
+  transition:
+    background-color var(--theme-transition),
+    border-color     var(--theme-transition),
+    color            var(--theme-transition);
+}
+
+/* ─── Atmosphere Particle Keyframes ────────────────────────────────────────
+   All animations use "极淡、稀疏、慢速" (barely-there, sparse, slow) principle.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Silkroad: sand grain drifts upward-right, fades in/out */
+@keyframes atm-sand-float {
+  0%   { transform: translate(0, 0);         opacity: 0;    }
+  12%  {                                      opacity: 0.9;  }
+  88%  {                                      opacity: 0.9;  }
+  100% { transform: translate(22px, -65px);  opacity: 0;    }
+}
+
+/* Modern City: tech dot expands and fades like a sonar ping */
+@keyframes atm-tech-pulse {
+  0%        { transform: scale(1);   opacity: 0.45; }
+  60%, 100% { transform: scale(3.5); opacity: 0;    }
+}
+
+/* History Culture: ink cloud slowly drifts and disperses */
+@keyframes atm-ink-cloud {
+  0%   { transform: translate(0, 0) scale(1);     opacity: 0; }
+  22%  {                                           opacity: 1; }
+  78%  {                                           opacity: 1; }
+  100% { transform: translate(-28px, 18px) scale(1.18); opacity: 0; }
+}
+
+/* Nature Landscape: mist band drifts rightward */
+@keyframes atm-mist-drift {
+  0%   { transform: translateX(-15px); opacity: 0; }
+  18%  {                               opacity: 1; }
+  82%  {                               opacity: 1; }
+  100% { transform: translateX(35px);  opacity: 0; }
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+}
+
+/* ─── Selection ────────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Responsive Breakpoints ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cinema-21-9 {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 480px) {
+  .cinema-21-9 {
+    aspect-ratio: 4 / 3;
+  }
+}

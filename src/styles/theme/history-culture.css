@@ -1,0 +1,38 @@
+/* ── History & Culture · 千年文脉 ───────────────────────────────────────────
+   Palette: palace vermilion, dark cyan, ink black, matte gold, rice-paper white
+   Feel: aged paper warmth, lacquerware depth, imperial restraint
+   ─────────────────────────────────────────────────────────────────────────── */
+
+[data-theme="history-culture"] {
+  /* surfaces */
+  --color-bg:            #0b0905;
+  --color-surface:       #130f0b;
+  --color-surface-2:     #1a1410;
+
+  /* text */
+  --color-text-primary:   #f4ece0;
+  --color-text-secondary: #aa9882;
+  --color-text-muted:     #6d583e;
+
+  /* accent — matte gold (哑金) */
+  --color-accent:         #b89530;
+  --color-accent-dim:     rgba(184, 149, 48, 0.12);
+
+  /* borders */
+  --color-border:         rgba(184, 149, 48, 0.10);
+  --color-border-strong:  rgba(184, 149, 48, 0.28);
+
+  /* atmosphere */
+  --color-particle:       rgba(184, 149, 48, 0.06);
+  --color-glow:           rgba(155, 58, 42, 0.04);
+
+  /* navbar bg on scroll */
+  --color-nav-bg:         rgba(11, 9, 5, 0.92);
+
+  /* scrollbar */
+  --color-scrollbar:      rgba(184, 149, 48, 0.2);
+}
+
+[data-theme="history-culture"] ::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar);
+}
