@@ -42,6 +42,18 @@ body {
   font-family: var(--font-inter), system-ui, sans-serif;
   letter-spacing: var(--letterspace-body);
   overflow-x: hidden;
+  /* ── Viewport cap: prevents layout blowout on 4K / ultra-wide monitors ── */
+  max-width: 1920px;
+  margin-inline: auto;
+}
+
+/* ── Root font scale: shrinks the 16px base ~5% on narrower desktop screens
+   so clamp() values derived from vw track more elegantly on 1280-1440px.   */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  html { font-size: 15px; }
+}
+@media (min-width: 1440px) {
+  html { font-size: 16px; }
 }
 
 /* ─── Typography Scale ─────────────────────────────────────────────────────── */

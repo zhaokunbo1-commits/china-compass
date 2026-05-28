@@ -19,7 +19,9 @@ export default function SectionShell({
     <section id={id} className={`relative w-full ${className}`} style={style}>
       <div
         className={[
-          "mx-auto px-6 md:px-10 py-20 md:py-28",
+          /* Responsive padding: tighter on standard 1080p, fuller on 1440p+ */
+          "mx-auto px-6 md:px-10 xl:px-14",
+          "py-12 md:py-16 xl:py-24",
           narrow ? "max-w-3xl" : "max-w-screen-xl",
         ].join(" ")}
       >

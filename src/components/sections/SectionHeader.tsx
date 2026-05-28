@@ -23,7 +23,7 @@ export default function SectionHeader({
   return (
     <FadeReveal
       variant="fadeUp"
-      className={`space-y-4 mb-12 ${center ? "text-center" : ""} ${className}`}
+      className={`space-y-4 mb-8 xl:mb-12 ${center ? "text-center" : ""} ${className}`}
     >
       <p
         className="font-body text-[10px] tracking-[0.3em] uppercase"
@@ -33,7 +33,7 @@ export default function SectionHeader({
       </p>
 
       <h2
-        className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight"
+        className="font-display text-3xl md:text-4xl xl:text-5xl leading-tight"
         style={{ color: "var(--color-text-primary, #f5f5f0)" }}
       >
         {title}

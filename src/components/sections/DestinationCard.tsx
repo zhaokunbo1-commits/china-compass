@@ -35,7 +35,7 @@ export default function DestinationCard({
       <Link href={href} className="block group">
         <CinematicPhoto
           gradient={gradient}
-          className="aspect-[3/4] w-full rounded-xl"
+          className="aspect-[4/5] lg:aspect-[3/4] w-full rounded-xl"
           grain
           grainOpacity={0.05}
           vignette

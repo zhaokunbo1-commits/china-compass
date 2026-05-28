@@ -113,12 +113,12 @@ export default function HomePage() {
           background: "rgba(200,169,110,0.03)",
         }}
       >
-        <div className="mx-auto max-w-screen-xl px-6 md:px-10 py-14">
+        <div className="mx-auto max-w-screen-xl px-6 md:px-10 py-10 md:py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
             {STATS.map((s, i) => (
               <FadeReveal key={s.label} variant="fadeUp" delay={i * 0.08}>
                 <p
-                  className="font-display text-3xl md:text-4xl lg:text-5xl leading-none mb-2"
+                  className="font-display text-3xl md:text-4xl xl:text-5xl leading-none mb-2"
                   style={{ color: "var(--color-accent, #c8a96e)" }}
                 >
                   {s.value}
@@ -138,14 +138,14 @@ export default function HomePage() {
       {/* ── Editorial Quote ─────────────────────────────────────────────── */}
       <SectionShell narrow>
         <FadeReveal variant="fadeIn" delay={0.1}>
-          <div className="text-center space-y-8 py-8">
+          <div className="text-center space-y-6 py-4 xl:space-y-8 xl:py-8">
             <Divider
               className="mx-auto"
               width="w-8"
               style={{ color: "var(--color-accent, #c8a96e)" }}
             />
             <blockquote
-              className="font-sub italic text-xl md:text-2xl lg:text-3xl leading-relaxed"
+              className="font-sub italic text-xl md:text-2xl xl:text-3xl leading-relaxed"
               style={{ color: "var(--color-text-secondary, #a0a09a)" }}
             >
               &ldquo;To travel in China is to read civilisation in three dimensions — where ancient
@@ -176,7 +176,7 @@ function ChapterCard({ chapter }: { chapter: (typeof CHAPTERS)[number] }) {
     <Link href={chapter.href} className="block group">
       <CinematicPhoto
         gradient={chapter.gradient}
-        className="aspect-[16/10] w-full rounded-xl"
+        className="aspect-video lg:aspect-[16/10] w-full rounded-xl"
         grain
         grainOpacity={0.045}
         vignette

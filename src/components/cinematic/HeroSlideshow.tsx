@@ -104,7 +104,7 @@ export default function HeroSlideshow() {
   return (
     <section
       className="relative w-full overflow-hidden bg-black"
-      style={{ minHeight: "100svh" }}
+      style={{ height: "100svh", maxHeight: "100svh" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -164,7 +164,7 @@ export default function HeroSlideshow() {
 
       {/* ── Text overlay ─────────────────────────────────────────── */}
       <div
-        className="absolute inset-0 flex flex-col justify-end pb-16 md:pb-20 px-8 md:px-14 lg:px-20"
+        className="absolute inset-0 flex flex-col justify-end pb-10 md:pb-14 lg:pb-16 px-8 md:px-14 lg:px-20"
         style={{ zIndex: 10 }}
       >
         <AnimatePresence mode="wait">
@@ -191,7 +191,7 @@ export default function HeroSlideshow() {
             <motion.h1
               className="font-display leading-none"
               style={{
-                fontSize: "clamp(3.2rem, 9vw, 7.5rem)",
+                fontSize: "clamp(2.6rem, 7vw, 6.5rem)",
                 color: "#f5f5f0",
                 textShadow: "0 4px 48px rgba(0,0,0,0.55)",
               }}
@@ -220,7 +220,7 @@ export default function HeroSlideshow() {
 
             {/* Tagline */}
             <motion.p
-              className="font-sub italic text-lg md:text-xl leading-relaxed max-w-lg"
+              className="font-sub italic text-base md:text-lg leading-relaxed max-w-lg"
               style={{ color: "rgba(255,255,255,0.58)" }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

@@ -163,7 +163,7 @@ export default function NatureLandscapePage() {
   return (
     <>
       {/* ── Cinematic Hero ─────────────────────────────────────────────── */}
-      <div className="relative w-full overflow-hidden" style={{ minHeight: "100svh" }}>
+      <div className="relative w-full overflow-hidden" style={{ height: "100svh", maxHeight: "100svh", overflow: "hidden" }}>
         <div className="absolute inset-0" style={{ background: HERO_GRADIENT }} />
 
         <div className="absolute top-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
@@ -195,7 +195,7 @@ export default function NatureLandscapePage() {
         <FilmGrain opacity={0.038} />
 
         <div
-          className="absolute inset-0 flex flex-col justify-end pb-20 md:pb-24 px-8 md:px-14 lg:px-20"
+          className="absolute inset-0 flex flex-col justify-end pb-10 md:pb-14 lg:pb-16 px-8 md:px-14 lg:px-20"
           style={{ zIndex: 10 }}
         >
           <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-2xl">
@@ -209,7 +209,7 @@ export default function NatureLandscapePage() {
             <h1
               className="font-display leading-none"
               style={{
-                fontSize: "clamp(2.8rem, 8vw, 7rem)",
+                fontSize: "clamp(2.4rem, 6vw, 6rem)",
                 color: "#e6f0ea",
                 textShadow: "0 4px 48px rgba(0,0,0,0.55)",
               }}

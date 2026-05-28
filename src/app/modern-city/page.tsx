@@ -167,7 +167,7 @@ export default function ModernCityPage() {
   return (
     <>
       {/* ── Cinematic Hero ─────────────────────────────────────────────── */}
-      <div className="relative w-full overflow-hidden" style={{ minHeight: "100svh" }}>
+      <div className="relative w-full overflow-hidden" style={{ height: "100svh", maxHeight: "100svh", overflow: "hidden" }}>
         <div className="absolute inset-0" style={{ background: HERO_GRADIENT }} />
 
         {/* Letterbox bars */}
@@ -200,7 +200,7 @@ export default function ModernCityPage() {
         <FilmGrain opacity={0.032} />
 
         <div
-          className="absolute inset-0 flex flex-col justify-end pb-20 md:pb-24 px-8 md:px-14 lg:px-20"
+          className="absolute inset-0 flex flex-col justify-end pb-10 md:pb-14 lg:pb-16 px-8 md:px-14 lg:px-20"
           style={{ zIndex: 10 }}
         >
           <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-2xl">
@@ -214,7 +214,7 @@ export default function ModernCityPage() {
             <h1
               className="font-display leading-none"
               style={{
-                fontSize: "clamp(3rem, 9vw, 7.5rem)",
+                fontSize: "clamp(2.6rem, 7vw, 6.5rem)",
                 color: "#e4ecf5",
                 textShadow: "0 4px 48px rgba(0,0,0,0.55)",
               }}
