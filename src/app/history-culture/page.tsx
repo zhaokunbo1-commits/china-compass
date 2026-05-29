@@ -163,12 +163,12 @@ export default function HistoryCulturePage() {
   return (
     <>
       {/* ── Cinematic Hero ─────────────────────────────────────────────── */}
-      <div className="relative w-full overflow-hidden" style={{ height: "100svh", maxHeight: "100svh", overflow: "hidden" }}>
+      <div className="relative overflow-hidden" style={{ width: "100vw", minHeight: "100vh", position: "relative" }}>
 
         {/* Pavilion landscape — sepia(0.15), breathing brightness, right-anchored */}
         <div
           aria-hidden="true"
-          className="absolute inset-0"
+          className="hero-bg absolute inset-0"
           style={{ animation: "history-breathe 12s ease-in-out infinite", zIndex: 1 }}
         >
           <Image
@@ -176,38 +176,36 @@ export default function HistoryCulturePage() {
             alt=""
             fill
             priority
+            sizes="100vw"
             quality={100}
             className="object-cover"
             style={{ objectPosition: "center right" }}
           />
         </div>
 
-        <div className="absolute top-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
-        <div className="absolute bottom-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
-
-        {/* Directional gradient overlay — top 0.45 → mid 0.20 → bottom 0.55 */}
+        {/* Soft vignette — edges only, keeps centre bright */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.20) 50%, rgba(0,0,0,0.55) 100%)",
+            background: "radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.25) 100%)",
             zIndex: 8,
           }}
         />
-        {/* Vignette */}
+        {/* Title legibility gradient — bottom only */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-x-0 bottom-0 h-1/2 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.31) 100%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 60%)",
             zIndex: 8,
           }}
         />
         <FilmGrain opacity={0.038} />
 
         <div
-          className="absolute inset-0 flex flex-col items-center justify-end pb-[clamp(3rem,8vh,6rem)] px-6 md:px-10"
+          className="hero-stage absolute inset-0 flex flex-col items-center justify-end pb-[clamp(3rem,8vh,6rem)] px-6 md:px-10"
           style={{ zIndex: 10 }}
         >
-          <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-3xl w-full text-center">
+          <FadeReveal variant="fadeUp" delay={0.15} className="hero-copy space-y-5 max-w-3xl w-full text-center">
             <p
               className="font-body text-[10px] tracking-[0.35em] uppercase"
               style={{ color: "rgba(255,255,255,0.40)" }}
@@ -216,9 +214,8 @@ export default function HistoryCulturePage() {
             </p>
 
             <h1
-              className="font-display leading-none"
+              className="hero-title font-display leading-none"
               style={{
-                fontSize: "clamp(2rem, 5vw, 5rem)",
                 color: "#f4ece0",
                 textShadow: "0 2px 4px rgba(0,0,0,0.3), 0 4px 48px rgba(0,0,0,0.55)",
               }}
@@ -229,7 +226,7 @@ export default function HistoryCulturePage() {
             <div className="flex items-center justify-center gap-4">
               <Divider width="w-10" style={accentStyle} />
               <span
-                className="font-sub italic text-base md:text-lg"
+                className="hero-subtitle font-sub italic"
                 style={{ color: "rgba(255,255,255,0.48)" }}
               >
                 千年文脉

@@ -1,13 +1,12 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { THEME_LABELS, THEME_ROUTES, ThemeId } from "@/lib/theme-config";
 import { useTheme } from "@/lib/theme-context";
-import ChinaMoodSelector from "@/components/theme-switch/ChinaMoodSelector";
 
 const NAV_THEMES: ThemeId[] = [
   "silkroad",
@@ -21,37 +20,19 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme } = useTheme();
 
-  const { scrollY } = useScroll();
-  /* Navbar background: fully transparent at top → theme-matched on scroll */
-  const bgOpacity = useTransform(scrollY, [0, 80], [0, 1]);
-
   return (
     <>
       <motion.header
         className="fixed top-0 left-0 right-0 z-50"
-        style={{
-          backgroundColor: useTransform(
-            bgOpacity,
-            (v) => `rgba(0,0,0,${v * 0.88})`
-          ),
-        }}
+        style={{ background: "transparent" }}
       >
-        <div
-          className="border-b transition-colors duration-500"
-          style={{ borderColor: "var(--color-border, rgba(255,255,255,0.08))" }}
-        >
-          {/* ── backdrop blur layer ── */}
-          <motion.div
-            className="absolute inset-0 backdrop-blur-md"
-            style={{ opacity: bgOpacity }}
-          />
-
-          <div className="relative max-w-screen-xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between gap-6">
+        <div>
+          <div className="relative w-full px-5 md:px-10 h-[60px] md:h-20 flex items-center justify-between gap-6">
 
             {/* Wordmark */}
             <Link
               href="/"
-              className="font-display text-sm tracking-[0.2em] uppercase transition-colors duration-500 flex-shrink-0"
+              className="font-display text-base md:text-sm tracking-[0.2em] uppercase transition-colors duration-500 flex-shrink-0"
               style={{ color: "var(--color-text-primary, #f5f5f0)" }}
             >
               China Compass
@@ -66,7 +47,7 @@ export default function Navbar() {
                   <Link
                     key={id}
                     href={route}
-                    className="font-body text-[10px] tracking-widest uppercase transition-all duration-300 whitespace-nowrap"
+                    className="font-body text-sm tracking-[0.5px] uppercase transition-all duration-300 whitespace-nowrap"
                     style={{
                       color: active
                         ? "var(--color-accent, #c8a96e)"
@@ -90,18 +71,16 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* Right side: ChinaMoodSelector + mobile toggle */}
+            {/* Right side: mobile toggle */}
             <div className="flex items-center gap-3 flex-shrink-0">
-              <ChinaMoodSelector />
-
-              {/* Mobile Toggle */}
+              {/* Mobile Toggle — 48×48 touch target */}
               <button
-                className="md:hidden transition-colors duration-300"
+                className="md:hidden transition-colors duration-300 flex items-center justify-center min-h-[48px] min-w-[48px] -mr-3"
                 style={{ color: "rgba(255,255,255,0.7)" }}
                 onClick={() => setMenuOpen((v) => !v)}
                 aria-label="Toggle menu"
               >
-                {menuOpen ? <X size={20} /> : <Menu size={20} />}
+                {menuOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
             </div>
 

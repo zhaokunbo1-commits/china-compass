@@ -38,13 +38,21 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+html,
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Prevent hero images from softening when upscaled on 4K / 5K displays */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
 body {
   font-family: var(--font-inter), system-ui, sans-serif;
   letter-spacing: var(--letterspace-body);
-  overflow-x: hidden;
-  /* ── Viewport cap: prevents layout blowout on 4K / ultra-wide monitors ── */
-  max-width: 1920px;
-  margin-inline: auto;
 }
 
 /* ── Root font scale: shrinks the 16px base ~5% on narrower desktop screens
@@ -54,6 +62,39 @@ body {
 }
 @media (min-width: 1440px) {
   html { font-size: 16px; }
+}
+
+/* ── Responsive hero title scaling ──────────────────────────────────────────
+   Drives the .hero-title / .hero-subtitle utility used by all chapter heroes.
+   Subtitle tracks at ~40% of the title size.                                 */
+.hero-title {
+  font-size: 5rem;
+}
+.hero-subtitle {
+  font-size: 2rem;
+}
+/* Tablet (769–1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-title    { font-size: 4rem; }
+  .hero-subtitle { font-size: 1.6rem; }
+}
+/* Large phone (481–768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-title    { font-size: 3rem; }
+  .hero-subtitle { font-size: 1.2rem; }
+}
+/* Small phone (≤480px) */
+@media (max-width: 480px) {
+  .hero-title    { font-size: 2.25rem; }
+  .hero-subtitle { font-size: 0.9rem; }
+}
+@media (min-width: 1441px) and (max-width: 2560px) {
+  .hero-title    { font-size: 7rem; }
+  .hero-subtitle { font-size: 2.8rem; }
+}
+@media (min-width: 2561px) {
+  .hero-title    { font-size: 9rem; }
+  .hero-subtitle { font-size: 3.6rem; }
 }
 
 /* ─── Typography Scale ─────────────────────────────────────────────────────── */
@@ -295,5 +336,46 @@ footer,
 @media (max-width: 480px) {
   .cinema-21-9 {
     aspect-ratio: 4 / 3;
+  }
+}
+
+/* ─── Mobile & Tablet hero / touch support (≤1024px) ───────────────────────── */
+@media (max-width: 1024px) {
+  /* Hero copy: 90% width, centred, lifted to bottom 20% */
+  .hero-copy {
+    width: 90% !important;
+    max-width: 90% !important;
+    margin-inline: auto;
+  }
+  .hero-stage {
+    padding-bottom: 20vh !important;
+  }
+  /* Stronger text shadow for legibility on small screens */
+  .hero-title,
+  .hero-subtitle {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 4px 48px rgba(0, 0, 0, 0.55) !important;
+  }
+  /* Background images: re-centre so portrait crops keep the subject */
+  .hero-bg img {
+    object-position: center center !important;
+  }
+  /* Silk Road CSS fresco: cover the full portrait viewport (no amber bands).
+     Only size is forced — position is left to the pan animation. */
+  .fresco-bg {
+    background-size: cover !important;
+  }
+  /* No hover transforms on touch — use active feedback instead */
+  .card-base:hover {
+    transform: none;
+  }
+  .btn-base:hover {
+    transform: none;
+    opacity: 1;
+  }
+  .card-base:active {
+    transform: scale(0.985);
+  }
+  .btn-base:active {
+    opacity: 0.7;
   }
 }
