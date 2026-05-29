@@ -103,15 +103,11 @@ export default function HeroSlideshow() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-black"
-      style={{ height: "100svh", maxHeight: "100svh" }}
+      className="relative overflow-hidden bg-black"
+      style={{ width: "100vw", minHeight: "100vh" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* ── Cinematic letterbox bars ─────────────────────────────── */}
-      <div className="absolute top-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
-      <div className="absolute bottom-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
-
       {/* ── Sliding background ───────────────────────────────────── */}
       <AnimatePresence mode="sync">
         <motion.div
