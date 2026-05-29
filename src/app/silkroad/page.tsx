@@ -200,10 +200,10 @@ export default function SilkRoadPage() {
 
         {/* Text */}
         <div
-          className="absolute inset-0 flex flex-col justify-end pb-10 md:pb-14 lg:pb-16 px-8 md:px-14 lg:px-20"
+          className="absolute inset-0 flex flex-col items-center justify-end pb-[clamp(3rem,8vh,6rem)] px-6 md:px-10"
           style={{ zIndex: 10 }}
         >
-          <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-2xl">
+          <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-2xl w-full">
             <p
               className="font-body text-[10px] tracking-[0.35em] uppercase"
               style={{ color: "rgba(255,255,255,0.40)" }}
@@ -214,7 +214,7 @@ export default function SilkRoadPage() {
             <h1
               className="font-display leading-none"
               style={{
-                fontSize: "clamp(2.6rem, 7vw, 6.5rem)",
+                fontSize: "clamp(2rem, 5vw, 5rem)",
                 color: "#f0e6d3",
                 textShadow: "0 4px 48px rgba(0,0,0,0.55)",
               }}

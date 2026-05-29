@@ -164,13 +164,13 @@ export default function HeroSlideshow() {
 
       {/* ── Text overlay ─────────────────────────────────────────── */}
       <div
-        className="absolute inset-0 flex flex-col justify-end pb-10 md:pb-14 lg:pb-16 px-8 md:px-14 lg:px-20"
+        className="absolute inset-0 flex flex-col items-center justify-end pb-[clamp(3rem,8vh,6rem)] px-6 md:px-10"
         style={{ zIndex: 10 }}
       >
         <AnimatePresence mode="wait">
           <motion.div
             key={`txt-${slide.id}`}
-            className="space-y-4 max-w-2xl"
+            className="space-y-4 max-w-2xl w-full"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -14 }}
@@ -191,7 +191,7 @@ export default function HeroSlideshow() {
             <motion.h1
               className="font-display leading-none"
               style={{
-                fontSize: "clamp(2.6rem, 7vw, 6.5rem)",
+                fontSize: "clamp(2rem, 5vw, 5rem)",
                 color: "#f5f5f0",
                 textShadow: "0 4px 48px rgba(0,0,0,0.55)",
               }}
