@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import FadeReveal from "@/components/cinematic/FadeReveal";
 import FilmGrain from "@/components/cinematic/FilmGrain";
 import SectionShell from "@/components/sections/SectionShell";
@@ -16,10 +17,10 @@ export const metadata: Metadata = {
 };
 
 const HERO_GRADIENT = [
-  "radial-gradient(ellipse 80% 58% at 28% 66%, rgba(38,98,58,0.50) 0%, transparent 55%)",
-  "radial-gradient(ellipse 60% 40% at 72% 20%, rgba(58,128,88,0.24) 0%, transparent 50%)",
-  "radial-gradient(ellipse 40% 30% at 85% 75%, rgba(30,80,50,0.18) 0%, transparent 45%)",
-  "linear-gradient(175deg, #050d07 0%, #0c1e11 25%, #15301c 48%, #1c3c24 60%, #0d1c11 78%, #040a06 100%)",
+  "radial-gradient(ellipse 80% 58% at 28% 66%, rgba(50,128,75,0.65) 0%, transparent 55%)",
+  "radial-gradient(ellipse 60% 40% at 72% 20%, rgba(75,160,110,0.35) 0%, transparent 50%)",
+  "radial-gradient(ellipse 40% 30% at 85% 75%, rgba(40,105,65,0.28) 0%, transparent 45%)",
+  "linear-gradient(175deg, #071109 0%, #102815 25%, #1C4025 48%, #26502F 60%, #112616 78%, #060C07 100%)",
 ].join(",");
 
 const DESTINATIONS = [
@@ -164,31 +165,40 @@ export default function NatureLandscapePage() {
     <>
       {/* ── Cinematic Hero ─────────────────────────────────────────────── */}
       <div className="relative w-full overflow-hidden" style={{ height: "100svh", maxHeight: "100svh", overflow: "hidden" }}>
-        <div className="absolute inset-0" style={{ background: HERO_GRADIENT }} />
+
+        {/* Zhangjiajie — contrast +5%, breathing brightness */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ animation: "nature-breathe 12s ease-in-out infinite", zIndex: 1 }}
+        >
+          <Image
+            src="/zhangjiajie-nature.png"
+            alt=""
+            fill
+            priority
+            quality={100}
+            className="object-cover"
+            style={{ objectPosition: "center" }}
+          />
+        </div>
 
         <div className="absolute top-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
         <div className="absolute bottom-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
 
-        <div
-          className="absolute inset-x-0 top-0 pointer-events-none"
-          style={{
-            height: "30%",
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.70) 0%, transparent 100%)",
-            zIndex: 8,
-          }}
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 pointer-events-none"
-          style={{
-            height: "55%",
-            background: "linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
-            zIndex: 8,
-          }}
-        />
+        {/* Directional gradient overlay — top 0.45 → mid 0.20 → bottom 0.55 */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.62) 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.20) 50%, rgba(0,0,0,0.55) 100%)",
+            zIndex: 8,
+          }}
+        />
+        {/* Vignette */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.31) 100%)",
             zIndex: 8,
           }}
         />
@@ -198,7 +208,7 @@ export default function NatureLandscapePage() {
           className="absolute inset-0 flex flex-col items-center justify-end pb-[clamp(3rem,8vh,6rem)] px-6 md:px-10"
           style={{ zIndex: 10 }}
         >
-          <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-2xl w-full">
+          <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-3xl w-full text-center">
             <p
               className="font-body text-[10px] tracking-[0.35em] uppercase"
               style={{ color: "rgba(255,255,255,0.40)" }}
@@ -211,13 +221,13 @@ export default function NatureLandscapePage() {
               style={{
                 fontSize: "clamp(2rem, 5vw, 5rem)",
                 color: "#e6f0ea",
-                textShadow: "0 4px 48px rgba(0,0,0,0.55)",
+                textShadow: "0 2px 4px rgba(0,0,0,0.3), 0 4px 48px rgba(0,0,0,0.55)",
               }}
             >
               Nature &amp; Landscape
             </h1>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center gap-4">
               <Divider width="w-10" style={accentStyle} />
               <span
                 className="font-sub italic text-base md:text-lg"
@@ -228,7 +238,7 @@ export default function NatureLandscapePage() {
             </div>
 
             <p
-              className="font-sub italic text-lg md:text-xl leading-relaxed max-w-lg"
+              className="font-sub italic text-lg md:text-xl leading-relaxed max-w-lg mx-auto"
               style={{ color: "rgba(255,255,255,0.56)" }}
             >
               &ldquo;Where the earth sculpted cathedrals from mist and stone — landscapes so vast

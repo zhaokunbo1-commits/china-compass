@@ -170,7 +170,7 @@ export default function HeroSlideshow() {
         <AnimatePresence mode="wait">
           <motion.div
             key={`txt-${slide.id}`}
-            className="space-y-4 max-w-2xl w-full"
+            className="space-y-4 max-w-3xl w-full text-center"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -14 }}
@@ -204,7 +204,7 @@ export default function HeroSlideshow() {
 
             {/* Divider + Chinese subtitle */}
             <motion.div
-              className="flex items-center gap-4"
+              className="flex items-center justify-center gap-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.52 }}
@@ -220,7 +220,7 @@ export default function HeroSlideshow() {
 
             {/* Tagline */}
             <motion.p
-              className="font-sub italic text-base md:text-lg leading-relaxed max-w-lg"
+              className="font-sub italic text-base md:text-lg leading-relaxed max-w-lg mx-auto"
               style={{ color: "rgba(255,255,255,0.58)" }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -237,7 +237,7 @@ export default function HeroSlideshow() {
             >
               <Link
                 href={slide.href}
-                className="inline-flex items-center gap-2 btn-base px-6 py-3 text-xs mt-2 transition-all hover:opacity-100"
+                className="inline-flex items-center gap-2 btn-base px-6 py-3 text-xs mt-2 transition-all hover:opacity-100 mx-auto"
                 style={accentBorderStyle}
               >
                 Explore

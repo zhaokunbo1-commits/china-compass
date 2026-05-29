@@ -29,6 +29,22 @@ const TECH_DOTS = [
   { id: 7, x: 42, y: 44, dur: 9,  del: 5  },
 ];
 
+/* Modern City: blurred bokeh circles simulating distant city lights */
+const BOKEH = [
+  { id: 1,  x: 12, y: 22, size: 80,  color: "rgba(77,184,201,0.09)",   blur: 28, dur: 20, del: 0  },
+  { id: 2,  x: 48, y: 38, size: 55,  color: "rgba(100,155,255,0.07)",  blur: 20, dur: 24, del: 4  },
+  { id: 3,  x: 80, y: 14, size: 110, color: "rgba(77,184,201,0.055)",  blur: 40, dur: 28, del: 8  },
+  { id: 4,  x: 26, y: 68, size: 65,  color: "rgba(140,195,255,0.08)",  blur: 24, dur: 22, del: 2  },
+  { id: 5,  x: 67, y: 78, size: 90,  color: "rgba(77,184,201,0.065)",  blur: 32, dur: 30, del: 6  },
+  { id: 6,  x: 90, y: 52, size: 45,  color: "rgba(200,230,255,0.06)",  blur: 16, dur: 16, del: 3  },
+  { id: 7,  x: 36, y: 48, size: 72,  color: "rgba(77,184,201,0.075)",  blur: 27, dur: 25, del: 9  },
+  { id: 8,  x: 57, y: 75, size: 58,  color: "rgba(90,140,220,0.07)",   blur: 22, dur: 19, del: 5  },
+  { id: 9,  x:  6, y: 84, size: 95,  color: "rgba(77,184,201,0.05)",   blur: 36, dur: 27, del: 1  },
+  { id: 10, x: 93, y: 30, size: 62,  color: "rgba(150,210,240,0.08)",  blur: 26, dur: 23, del: 7  },
+  { id: 11, x: 22, y: 10, size: 40,  color: "rgba(77,184,201,0.06)",   blur: 14, dur: 18, del: 11 },
+  { id: 12, x: 74, y: 44, size: 85,  color: "rgba(60,120,200,0.055)",  blur: 30, dur: 26, del: 13 },
+];
+
 /* History Culture: large blurry ink-cloud blobs */
 const INK_CLOUDS = [
   { id: 1, x:  8, y: 15, w: 320, h: 180, dur: 30, del: 0  },
@@ -80,25 +96,77 @@ function SilkroadAtmosphere() {
 function ModernCityAtmosphere() {
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Subtle tech grid */}
+
+      {/* ── Deep blue city nightscape base gradient ── */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(77,184,201,0.022) 1px, transparent 1px)," +
-            "linear-gradient(90deg, rgba(77,184,201,0.022) 1px, transparent 1px)",
-          backgroundSize: "90px 90px",
+          background: [
+            /* Deep midnight sky — top */
+            "linear-gradient(180deg, #020610 0%, #040c1e 30%, #060f28 60%, #050c1c 80%, #030810 100%)",
+          ].join(","),
         }}
       />
-      {/* Cyan edge glow – top right */}
+
+      {/* ── City horizon glow — warm amber light from below (reflected city lights) ── */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 50% 40% at 85% 15%, rgba(77,184,201,0.06) 0%, transparent 65%)",
+            "radial-gradient(ellipse 100% 28% at 50% 100%, rgba(30,60,130,0.35) 0%, transparent 70%)",
         }}
       />
-      {/* Pulse dots */}
+
+      {/* ── Distant skyline silhouette glow — lower third ── */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: [
+            "radial-gradient(ellipse 70% 20% at 25% 88%, rgba(20,50,110,0.28) 0%, transparent 60%)",
+            "radial-gradient(ellipse 60% 18% at 75% 92%, rgba(18,45,100,0.22) 0%, transparent 58%)",
+          ].join(","),
+        }}
+      />
+
+      {/* ── Cyan tech glow — upper right ── */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 45% 35% at 88% 12%, rgba(77,184,201,0.07) 0%, transparent 65%)",
+        }}
+      />
+
+      {/* ── Subtle tech grid ── */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(77,184,201,0.018) 1px, transparent 1px)," +
+            "linear-gradient(90deg, rgba(77,184,201,0.018) 1px, transparent 1px)",
+          backgroundSize: "100px 100px",
+        }}
+      />
+
+      {/* ── Bokeh city light particles ── */}
+      {BOKEH.map((b) => (
+        <div
+          key={b.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${b.x}%`,
+            top: `${b.y}%`,
+            width: b.size,
+            height: b.size,
+            background: b.color,
+            filter: `blur(${b.blur}px)`,
+            opacity: 0,
+            animation: `atm-city-bokeh ${b.dur}s ${b.del}s ease-in-out infinite`,
+          }}
+        />
+      ))}
+
+      {/* ── Sonar pulse dots ── */}
       {TECH_DOTS.map((p) => (
         <div
           key={p.id}

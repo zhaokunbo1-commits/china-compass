@@ -17,10 +17,10 @@ export const metadata: Metadata = {
 };
 
 const HERO_GRADIENT = [
-  "radial-gradient(ellipse 90% 65% at 42% 78%, rgba(200,118,38,0.58) 0%, transparent 55%)",
-  "radial-gradient(ellipse 55% 45% at 88% 22%, rgba(135,58,14,0.38) 0%, transparent 50%)",
-  "radial-gradient(ellipse 35% 28% at 12% 35%, rgba(90,40,8,0.22) 0%, transparent 45%)",
-  "linear-gradient(165deg, #120900 0%, #2e1405 18%, #5c2808 38%, #884018 55%, #481d07 75%, #0e0500 100%)",
+  "radial-gradient(ellipse 90% 65% at 42% 78%, rgba(220,140,55,0.72) 0%, transparent 55%)",
+  "radial-gradient(ellipse 55% 45% at 88% 22%, rgba(160,80,28,0.50) 0%, transparent 50%)",
+  "radial-gradient(ellipse 35% 28% at 12% 35%, rgba(110,55,15,0.32) 0%, transparent 45%)",
+  "linear-gradient(165deg, #1C0E00 0%, #3D1C07 18%, #7A370B 38%, #A6551F 55%, #60270A 75%, #140700 100%)",
 ].join(",");
 
 const DESTINATIONS = [
@@ -164,46 +164,64 @@ export default function SilkRoadPage() {
     <>
       {/* ── Cinematic Hero ─────────────────────────────────────────────── */}
       <div className="relative w-full overflow-hidden" style={{ height: "100svh", maxHeight: "100svh", overflow: "hidden" }}>
+        {/* Dark amber base — shows through transparent parts of fresco */}
         <div className="absolute inset-0" style={{ background: HERO_GRADIENT }} />
+
+        {/* Dunhuang fresco — 30% desaturated, -15% brightness, 40s L→R pan */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/dunhuang-fresco.png')",
+            backgroundSize: "130% auto",
+            backgroundRepeat: "no-repeat",
+            filter: "saturate(55%) brightness(62%)",
+            animation: "silkroad-pan 40s ease-in-out infinite alternate",
+            zIndex: 1,
+          }}
+        />
 
         {/* Letterbox bars */}
         <div className="absolute top-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
         <div className="absolute bottom-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
 
-        {/* Top shadow */}
-        <div
-          className="absolute inset-x-0 top-0 pointer-events-none"
-          style={{
-            height: "30%",
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.70) 0%, transparent 100%)",
-            zIndex: 8,
-          }}
-        />
-        {/* Bottom shadow */}
-        <div
-          className="absolute inset-x-0 bottom-0 pointer-events-none"
-          style={{
-            height: "55%",
-            background: "linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
-            zIndex: 8,
-          }}
-        />
-        {/* Vignette */}
+        {/* Directional gradient overlay — top 0.45 → mid 0.20 → bottom 0.45 */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.62) 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.20) 50%, rgba(0,0,0,0.45) 100%)",
+            zIndex: 8,
+          }}
+        />
+        {/* Vignette — 50% reduced */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.31) 100%)",
             zIndex: 8,
           }}
         />
         <FilmGrain opacity={0.038} />
+
+        {/* Desert sand grain — anisotropic high-frequency fractal noise */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75 0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E")`,
+            backgroundSize: "300px 300px",
+            opacity: 0.07,
+            zIndex: 6,
+            mixBlendMode: "overlay",
+          }}
+        />
 
         {/* Text */}
         <div
           className="absolute inset-0 flex flex-col items-center justify-end pb-[clamp(3rem,8vh,6rem)] px-6 md:px-10"
           style={{ zIndex: 10 }}
         >
-          <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-2xl w-full">
+          <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-3xl w-full text-center">
             <p
               className="font-body text-[10px] tracking-[0.35em] uppercase"
               style={{ color: "rgba(255,255,255,0.40)" }}
@@ -222,7 +240,7 @@ export default function SilkRoadPage() {
               Silk Road
             </h1>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center gap-4">
               <Divider width="w-10" style={accentStyle} />
               <span
                 className="font-sub italic text-base md:text-lg"
@@ -233,7 +251,7 @@ export default function SilkRoadPage() {
             </div>
 
             <p
-              className="font-sub italic text-lg md:text-xl leading-relaxed max-w-lg"
+              className="font-sub italic text-lg md:text-xl leading-relaxed max-w-lg mx-auto"
               style={{ color: "rgba(255,255,255,0.56)" }}
             >
               &ldquo;Where ancient caravans traded silk for salvation — a corridor of empires,

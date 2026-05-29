@@ -46,7 +46,7 @@ export default function Navbar() {
             style={{ opacity: bgOpacity }}
           />
 
-          <div className="relative max-w-screen-xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between gap-6">
+          <div className="relative max-w-screen-xl mx-auto px-6 md:px-10 h-20 flex items-center justify-between gap-6">
 
             {/* Wordmark */}
             <Link

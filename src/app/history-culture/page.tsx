@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import FadeReveal from "@/components/cinematic/FadeReveal";
 import FilmGrain from "@/components/cinematic/FilmGrain";
 import SectionShell from "@/components/sections/SectionShell";
@@ -16,10 +17,10 @@ export const metadata: Metadata = {
 };
 
 const HERO_GRADIENT = [
-  "radial-gradient(ellipse 72% 52% at 38% 63%, rgba(162,93,21,0.50) 0%, transparent 54%)",
-  "radial-gradient(ellipse 50% 40% at 84% 29%, rgba(122,43,26,0.30) 0%, transparent 50%)",
-  "radial-gradient(ellipse 30% 24% at 10% 40%, rgba(90,30,10,0.20) 0%, transparent 44%)",
-  "linear-gradient(172deg, #0d0800 0%, #231308 22%, #462410 40%, #663a18 58%, #2d1609 78%, #0c0602 100%)",
+  "radial-gradient(ellipse 72% 52% at 38% 63%, rgba(195,115,35,0.65) 0%, transparent 54%)",
+  "radial-gradient(ellipse 50% 40% at 84% 29%, rgba(150,60,35,0.42) 0%, transparent 50%)",
+  "radial-gradient(ellipse 30% 24% at 10% 40%, rgba(115,45,18,0.30) 0%, transparent 44%)",
+  "linear-gradient(172deg, #150E00 0%, #2E1A0A 22%, #5C3015 40%, #82491E 58%, #3A1E0C 78%, #120804 100%)",
 ].join(",");
 
 const DESTINATIONS = [
@@ -163,31 +164,40 @@ export default function HistoryCulturePage() {
     <>
       {/* ── Cinematic Hero ─────────────────────────────────────────────── */}
       <div className="relative w-full overflow-hidden" style={{ height: "100svh", maxHeight: "100svh", overflow: "hidden" }}>
-        <div className="absolute inset-0" style={{ background: HERO_GRADIENT }} />
+
+        {/* Pavilion landscape — sepia(0.15), breathing brightness, right-anchored */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ animation: "history-breathe 12s ease-in-out infinite", zIndex: 1 }}
+        >
+          <Image
+            src="/history-pavilion.png"
+            alt=""
+            fill
+            priority
+            quality={100}
+            className="object-cover"
+            style={{ objectPosition: "center right" }}
+          />
+        </div>
 
         <div className="absolute top-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
         <div className="absolute bottom-0 inset-x-0 h-[clamp(3px,2.2vw,32px)] bg-black z-20 pointer-events-none" />
 
-        <div
-          className="absolute inset-x-0 top-0 pointer-events-none"
-          style={{
-            height: "30%",
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.70) 0%, transparent 100%)",
-            zIndex: 8,
-          }}
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 pointer-events-none"
-          style={{
-            height: "55%",
-            background: "linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
-            zIndex: 8,
-          }}
-        />
+        {/* Directional gradient overlay — top 0.45 → mid 0.20 → bottom 0.55 */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.62) 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.20) 50%, rgba(0,0,0,0.55) 100%)",
+            zIndex: 8,
+          }}
+        />
+        {/* Vignette */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at center, transparent 42%, rgba(0,0,0,0.31) 100%)",
             zIndex: 8,
           }}
         />
@@ -197,7 +207,7 @@ export default function HistoryCulturePage() {
           className="absolute inset-0 flex flex-col items-center justify-end pb-[clamp(3rem,8vh,6rem)] px-6 md:px-10"
           style={{ zIndex: 10 }}
         >
-          <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-2xl w-full">
+          <FadeReveal variant="fadeUp" delay={0.15} className="space-y-5 max-w-3xl w-full text-center">
             <p
               className="font-body text-[10px] tracking-[0.35em] uppercase"
               style={{ color: "rgba(255,255,255,0.40)" }}
@@ -210,13 +220,13 @@ export default function HistoryCulturePage() {
               style={{
                 fontSize: "clamp(2rem, 5vw, 5rem)",
                 color: "#f4ece0",
-                textShadow: "0 4px 48px rgba(0,0,0,0.55)",
+                textShadow: "0 2px 4px rgba(0,0,0,0.3), 0 4px 48px rgba(0,0,0,0.55)",
               }}
             >
               History &amp; Culture
             </h1>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center gap-4">
               <Divider width="w-10" style={accentStyle} />
               <span
                 className="font-sub italic text-base md:text-lg"
@@ -227,7 +237,7 @@ export default function HistoryCulturePage() {
             </div>
 
             <p
-              className="font-sub italic text-lg md:text-xl leading-relaxed max-w-lg"
+              className="font-sub italic text-lg md:text-xl leading-relaxed max-w-lg mx-auto"
               style={{ color: "rgba(255,255,255,0.56)" }}
             >
               &ldquo;Five thousand years carved in stone and silence — the dynasties that shaped

@@ -207,6 +207,30 @@ footer,
    All animations use "极淡、稀疏、慢速" (barely-there, sparse, slow) principle.
    ─────────────────────────────────────────────────────────────────────────── */
 
+/* Modern City: almost-imperceptible brightness breathing (12s loop) */
+@keyframes city-breathe {
+  0%, 100% { filter: saturate(90%) brightness(0.95); }
+  50%       { filter: saturate(90%) brightness(1.00); }
+}
+
+/* History & Culture: same breathing, sepia variant */
+@keyframes history-breathe {
+  0%, 100% { filter: sepia(0.15) brightness(0.95); }
+  50%       { filter: sepia(0.15) brightness(1.00); }
+}
+
+/* Nature & Landscape: same breathing, contrast +5% variant */
+@keyframes nature-breathe {
+  0%, 100% { filter: contrast(1.05) brightness(0.95); }
+  50%       { filter: contrast(1.05) brightness(1.00); }
+}
+
+/* Silk Road: slow left-to-right fresco pan (40s each way, alternates) */
+@keyframes silkroad-pan {
+  0%   { background-position: 5% 50%;  }
+  100% { background-position: 95% 50%; }
+}
+
 /* Silkroad: sand grain drifts upward-right, fades in/out */
 @keyframes atm-sand-float {
   0%   { transform: translate(0, 0);         opacity: 0;    }
@@ -219,6 +243,14 @@ footer,
 @keyframes atm-tech-pulse {
   0%        { transform: scale(1);   opacity: 0.45; }
   60%, 100% { transform: scale(3.5); opacity: 0;    }
+}
+
+/* Modern City: bokeh light bubble drifts upward and fades */
+@keyframes atm-city-bokeh {
+  0%   { transform: translate(0, 0);        opacity: 0; }
+  18%  {                                     opacity: 1; }
+  82%  {                                     opacity: 1; }
+  100% { transform: translate(6px, -28px);  opacity: 0; }
 }
 
 /* History Culture: ink cloud slowly drifts and disperses */
