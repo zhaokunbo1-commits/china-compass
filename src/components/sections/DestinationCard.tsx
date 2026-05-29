@@ -17,6 +17,11 @@ interface DestinationCardProps extends DestinationCardData {
   index?: number;
 }
 
+/**
+ * A destination shown as a small "mounted painting" on rice paper:
+ * an ink-wash tile in a paper frame, with an English caption beneath
+ * (museum-label style) — legible for inbound travellers.
+ */
 export default function DestinationCard({
   name,
   location,
@@ -27,69 +32,62 @@ export default function DestinationCard({
 }: DestinationCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.8, delay: index * 0.08, ease: [0.4, 0, 0.2, 1] }}
     >
       <Link href={href} className="block group">
-        <CinematicPhoto
-          gradient={gradient}
-          className="aspect-[4/5] lg:aspect-[3/4] w-full rounded-xl"
-          grain
-          grainOpacity={0.05}
-          vignette
-          overlayDark={0.15}
+        {/* paper mount */}
+        <div
+          className="transition-transform duration-500 group-hover:-translate-y-1.5"
+          style={{
+            padding: "8px",
+            background: "var(--color-surface)",
+            border: "1px solid var(--color-border)",
+            boxShadow: "0 8px 26px -14px rgba(43,38,34,0.45)",
+          }}
         >
-          {/* Bottom text layer */}
-          <div
-            className="absolute inset-0 flex flex-col justify-end p-5"
-            style={{ zIndex: 6 }}
-          >
-            {/* Gradient text bg */}
-            <div
-              className="absolute inset-x-0 bottom-0 h-2/3 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
-              }}
-            />
+          {/* ink-wash painting */}
+          <CinematicPhoto
+            gradient={gradient}
+            className="aspect-[5/4] w-full"
+            grain
+            grainOpacity={0.05}
+            vignette
+            overlayDark={0}
+          />
 
-            <div className="relative">
-              <p
-                className="font-body text-[9px] tracking-[0.3em] uppercase mb-1.5"
-                style={{ color: "rgba(255,255,255,0.38)" }}
-              >
-                {location}
-              </p>
-
+          {/* caption — ink on paper */}
+          <div className="pt-3 pb-1 px-1">
+            <p
+              className="font-body text-[9px] tracking-[0.28em] uppercase mb-1"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              {location}
+            </p>
+            <div className="flex items-center justify-between gap-2">
               <h3
-                className="font-display text-lg md:text-xl leading-tight"
-                style={{ color: "#f2ece2" }}
+                className="font-display text-base md:text-lg leading-tight"
+                style={{ color: "var(--color-text-primary)" }}
               >
                 {name}
               </h3>
-
-              {/* Hover reveal */}
-              <p
-                className="font-body text-[11px] leading-relaxed mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-                style={{ color: "rgba(255,255,255,0.55)" }}
-              >
-                {tagline}
-              </p>
-
-              <div
-                className="flex items-center gap-1.5 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ color: "var(--color-accent, #c8a96e)" }}
-              >
-                <span className="font-body text-[9px] tracking-[0.25em] uppercase">
-                  Discover
-                </span>
-                <ArrowUpRight size={11} strokeWidth={2} />
-              </div>
+              <ArrowUpRight
+                size={14}
+                strokeWidth={1.75}
+                className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ color: "var(--color-accent)" }}
+              />
             </div>
+            <p
+              className="font-sub text-[12px] leading-snug mt-1.5"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              {tagline}
+            </p>
           </div>
-        </CinematicPhoto>
+        </div>
       </Link>
     </motion.div>
   );

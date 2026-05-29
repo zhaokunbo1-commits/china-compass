@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cinzel, Playfair_Display, Inter } from "next/font/google";
+import { Cinzel, Playfair_Display, Inter, Noto_Serif_SC, Ma_Shan_Zheng } from "next/font/google";
 import "@/styles/globals.css";
 import "@/styles/theme/tokens.css";
 import "@/styles/theme/silkroad.css";
@@ -9,7 +9,6 @@ import "@/styles/theme/nature-landscape.css";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 import ThemeProvider from "@/components/theme-switch/ThemeProvider";
-import AtmosphereLayer from "@/components/cinematic/AtmosphereLayer";
 
 /* ─── Fonts ──────────────────────────────────────────────────────────────── */
 
@@ -32,6 +31,20 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+/* 思源宋体 — primary Chinese serif (the "ink" voice) */
+const notoSerifSC = Noto_Serif_SC({
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-song",
+  display: "swap",
+});
+
+/* 马善政 — brush calligraphy, used sparingly for seals / accents */
+const maShanZheng = Ma_Shan_Zheng({
+  weight: ["400"],
+  variable: "--font-brush",
   display: "swap",
 });
 
@@ -65,18 +78,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-theme="base"
-      className={`${cinzel.variable} ${playfair.variable} ${inter.variable}`}
+      className={`${cinzel.variable} ${playfair.variable} ${inter.variable} ${notoSerifSC.variable} ${maShanZheng.variable}`}
     >
       <body
         className="antialiased font-body"
         style={{
-          background: "var(--color-bg, #0a0a0a)",
-          color: "var(--color-text-primary, #f5f5f0)",
+          background: "var(--color-bg, #efe7d4)",
+          color: "var(--color-text-primary, #2b2622)",
         }}
       >
         <ThemeProvider>
-          {/* Fixed atmosphere layer — renders behind all content via DOM order */}
-          <AtmosphereLayer />
           <Navbar />
           <main className="relative min-h-screen" style={{ zIndex: 1 }}>
             {children}

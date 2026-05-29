@@ -1,36 +1,35 @@
-/* ── Modern City · 未来都市 ─────────────────────────────────────────────────
-   Palette: deep-space grey, midnight blue, tech cyan, micro-silver
-   Feel: frosted glass, brushed metal, cool city luminescence
+/* ── Modern City · 都市万象 ─────────────────────────────────────────────────
+   纸本 + 石青(mineral blue) accent.
    ─────────────────────────────────────────────────────────────────────────── */
 
 [data-theme="modern-city"] {
-  /* surfaces */
-  --color-bg:            #060a0f;
-  --color-surface:       #0c1219;
-  --color-surface-2:     #121b24;
+  /* paper tint — cool, clean grey-white */
+  --color-bg:            #ebe8de;
+  --color-surface:       #e4e1d5;
+  --color-surface-2:     #dcd8ca;
 
-  /* text */
-  --color-text-primary:   #e4ecf5;
-  --color-text-secondary: #8599b4;
-  --color-text-muted:     #3c5068;
+  /* watermark — fine geometric grid (古今对话) */
+  --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg stroke='%233a6b7e' stroke-opacity='0.4' stroke-width='0.8'%3E%3Cline x1='0' y1='0' x2='64' y2='0'/%3E%3Cline x1='0' y1='0' x2='0' y2='64'/%3E%3C/g%3E%3C/svg%3E");
+  --motif-size: 68px;
+  --motif-repeat: repeat;
+  --motif-pos: center;
 
-  /* accent — tech cyan */
-  --color-accent:         #4db8c9;
-  --color-accent-dim:     rgba(77, 184, 201, 0.10);
+  --color-text-primary:   #2b2622;
+  --color-text-secondary: #5c5347;
+  --color-text-muted:     #938876;
 
-  /* borders */
-  --color-border:         rgba(77, 184, 201, 0.08);
-  --color-border-strong:  rgba(77, 184, 201, 0.22);
+  /* accent — 石青 */
+  --color-accent:         #3a6b7e;
+  --color-accent-dim:     rgba(58, 107, 126, 0.10);
 
-  /* atmosphere */
-  --color-particle:       rgba(77, 184, 201, 0.06);
-  --color-glow:           rgba(77, 184, 201, 0.03);
+  --color-border:         rgba(43, 38, 34, 0.14);
+  --color-border-strong:  rgba(43, 38, 34, 0.30);
 
-  /* navbar bg on scroll */
-  --color-nav-bg:         rgba(6, 10, 15, 0.93);
+  --color-particle:       rgba(43, 38, 34, 0.05);
+  --color-glow:           rgba(58, 107, 126, 0.05);
 
-  /* scrollbar */
-  --color-scrollbar:      rgba(77, 184, 201, 0.2);
+  --color-nav-bg:         rgba(239, 231, 212, 0.86);
+  --color-scrollbar:      rgba(43, 38, 34, 0.20);
 }
 
 [data-theme="modern-city"] ::-webkit-scrollbar-thumb {

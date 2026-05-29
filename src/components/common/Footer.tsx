@@ -12,7 +12,7 @@ export default function Footer() {
         background: "var(--color-surface, #111)",
       }}
     >
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
 
         {/* Brand */}
         <div className="space-y-3">
@@ -62,7 +62,7 @@ export default function Footer() {
       </div>
 
       <div
-        className="max-w-screen-xl mx-auto mt-10 pt-6 border-t flex justify-between items-center"
+        className="max-w-7xl mx-auto mt-10 pt-6 border-t flex justify-between items-center"
         style={{ borderColor: "var(--color-border, rgba(255,255,255,0.06))" }}
       >
         <p className="font-body text-xs text-white/20">

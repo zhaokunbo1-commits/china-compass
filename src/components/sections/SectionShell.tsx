@@ -22,7 +22,7 @@ export default function SectionShell({
           /* Responsive padding: tighter on standard 1080p, fuller on 1440p+ */
           "mx-auto px-6 md:px-10 xl:px-14",
           "py-12 md:py-16 xl:py-24",
-          narrow ? "max-w-3xl" : "max-w-screen-xl",
+          narrow ? "max-w-3xl" : "max-w-7xl",
         ].join(" ")}
       >
         {children}

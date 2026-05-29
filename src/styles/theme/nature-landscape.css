@@ -1,36 +1,35 @@
-/* ── Nature & Landscape · 山河秘境 ──────────────────────────────────────────
-   Palette: mountain green, lake cyan, snow white, mist grey, forest indigo
-   Feel: morning mist, cool mountain air, translucent water reflections
+/* ── Nature & Landscape · 锦绣山河 ──────────────────────────────────────────
+   纸本 + 石绿(mineral green) accent.
    ─────────────────────────────────────────────────────────────────────────── */
 
 [data-theme="nature-landscape"] {
-  /* surfaces */
-  --color-bg:            #070d0a;
-  --color-surface:       #0d1512;
-  --color-surface-2:     #121e1a;
+  /* paper tint — cool 青苔灰绿 */
+  --color-bg:            #e8e8d6;
+  --color-surface:       #e1e2cd;
+  --color-surface-2:     #d9dcc2;
 
-  /* text */
-  --color-text-primary:   #e6f0ea;
-  --color-text-secondary: #88aa98;
-  --color-text-muted:     #496b58;
+  /* watermark — layered distant ridges (远山) */
+  --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='320'%3E%3Cg fill='none' stroke='%235e7e5c' stroke-opacity='0.45' stroke-width='1.2'%3E%3Cpath d='M0 230 L110 130 L210 210 L330 100 L450 200 L600 120'/%3E%3Cpath d='M0 290 L150 200 L300 270 L450 180 L600 260'/%3E%3C/g%3E%3C/svg%3E");
+  --motif-size: 760px auto;
+  --motif-repeat: repeat-x;
+  --motif-pos: center 78%;
 
-  /* accent — mountain sage-green */
-  --color-accent:         #68a888;
-  --color-accent-dim:     rgba(104, 168, 136, 0.10);
+  --color-text-primary:   #2b2622;
+  --color-text-secondary: #5c5347;
+  --color-text-muted:     #938876;
 
-  /* borders */
-  --color-border:         rgba(104, 168, 136, 0.08);
-  --color-border-strong:  rgba(104, 168, 136, 0.22);
+  /* accent — 石绿 */
+  --color-accent:         #5e7e5c;
+  --color-accent-dim:     rgba(94, 126, 92, 0.10);
 
-  /* atmosphere */
-  --color-particle:       rgba(104, 168, 136, 0.06);
-  --color-glow:           rgba(104, 168, 136, 0.03);
+  --color-border:         rgba(43, 38, 34, 0.14);
+  --color-border-strong:  rgba(43, 38, 34, 0.30);
 
-  /* navbar bg on scroll */
-  --color-nav-bg:         rgba(7, 13, 10, 0.92);
+  --color-particle:       rgba(43, 38, 34, 0.05);
+  --color-glow:           rgba(94, 126, 92, 0.05);
 
-  /* scrollbar */
-  --color-scrollbar:      rgba(104, 168, 136, 0.2);
+  --color-nav-bg:         rgba(239, 231, 212, 0.86);
+  --color-scrollbar:      rgba(43, 38, 34, 0.20);
 }
 
 [data-theme="nature-landscape"] ::-webkit-scrollbar-thumb {

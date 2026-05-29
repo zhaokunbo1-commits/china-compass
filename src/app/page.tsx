@@ -1,238 +1,244 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import Link from "next/link";
-import HeroSlideshow from "@/components/cinematic/HeroSlideshow";
-import CinematicPhoto from "@/components/cinematic/CinematicPhoto";
-import SectionShell from "@/components/sections/SectionShell";
-import SectionHeader from "@/components/sections/SectionHeader";
-import FadeReveal from "@/components/cinematic/FadeReveal";
-import Divider from "@/components/common/Divider";
-import { ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "China Compass — Four Faces of a Civilisation",
+  title: "China Compass — A Traveller's Guide to China",
   description:
-    "A cinematic travel guide to China's four great journeys: the Silk Road, modern cities, ancient history, and wild nature.",
+    "An inbound traveller's guide to China: splendid landscapes, the Silk Road, living heritage, and modern cities — told with a painter's eye.",
 };
 
-const CHAPTERS = [
-  {
-    id: "silkroad",
-    chapter: "Chapter I",
-    title: "Silk Road",
-    subtitle: "丝路敦煌",
-    tagline: "Where ancient caravans traded silk for salvation",
-    href: "/silkroad",
-    accent: "#c9a050",
-    gradient: [
-      "radial-gradient(ellipse 90% 65% at 42% 78%, rgba(200,118,38,0.58) 0%, transparent 55%)",
-      "radial-gradient(ellipse 55% 45% at 88% 22%, rgba(135,58,14,0.38) 0%, transparent 50%)",
-      "linear-gradient(165deg, #120900 0%, #2e1405 18%, #5c2808 38%, #884018 55%, #481d07 75%, #0e0500 100%)",
-    ].join(","),
-  },
-  {
-    id: "modern-city",
-    chapter: "Chapter II",
-    title: "Modern City",
-    subtitle: "未来都市",
-    tagline: "Glass towers reaching through tomorrow's sky",
-    href: "/modern-city",
-    accent: "#4db8c9",
-    gradient: [
-      "radial-gradient(ellipse 80% 55% at 50% 100%, rgba(18,58,118,0.68) 0%, transparent 50%)",
-      "radial-gradient(ellipse 40% 28% at 76% 33%, rgba(58,178,222,0.13) 0%, transparent 50%)",
-      "linear-gradient(180deg, #030810 0%, #060d1e 28%, #091630 54%, #050c1a 75%, #020609 100%)",
-    ].join(","),
-  },
-  {
-    id: "history-culture",
-    chapter: "Chapter III",
-    title: "History & Culture",
-    subtitle: "千年文脉",
-    tagline: "Five thousand years carved in stone and silence",
-    href: "/history-culture",
-    accent: "#b89530",
-    gradient: [
-      "radial-gradient(ellipse 72% 52% at 38% 63%, rgba(162,93,21,0.50) 0%, transparent 54%)",
-      "radial-gradient(ellipse 50% 40% at 84% 29%, rgba(122,43,26,0.30) 0%, transparent 50%)",
-      "linear-gradient(172deg, #0d0800 0%, #231308 22%, #462410 40%, #663a18 58%, #2d1609 78%, #0c0602 100%)",
-    ].join(","),
-  },
-  {
-    id: "nature-landscape",
-    chapter: "Chapter IV",
-    title: "Nature & Landscape",
-    subtitle: "山河秘境",
-    tagline: "Where the earth sculpted cathedrals from mist and stone",
-    href: "/nature-landscape",
-    accent: "#68a888",
-    gradient: [
-      "radial-gradient(ellipse 80% 58% at 28% 66%, rgba(38,98,58,0.50) 0%, transparent 55%)",
-      "radial-gradient(ellipse 60% 40% at 72% 20%, rgba(58,128,88,0.24) 0%, transparent 50%)",
-      "linear-gradient(175deg, #050d07 0%, #0c1e11 25%, #15301c 48%, #1c3c24 60%, #0d1c11 78%, #040a06 100%)",
-    ].join(","),
-  },
-];
+interface Chapter {
+  en: string;
+  cn: string;
+  places: string;
+  poemCn: [string, string];
+  poemEn: string;
+  author: string;
+  seal: string;
+  image: string;
+  href: string;
+}
 
-const STATS = [
-  { value: "5,000", label: "Years of Written History" },
-  { value: "56", label: "Ethnic Groups" },
-  { value: "33", label: "UNESCO World Heritage Sites" },
-  { value: "9.6M km²", label: "Of Diverse Terrain" },
+const CHAPTERS: Chapter[] = [
+  {
+    en: "Splendid Landscapes",
+    cn: "锦绣山河",
+    places: "Guilin · Zhangjiajie · Tibet · Xinjiang",
+    poemCn: ["江作青罗带", "山如碧玉簪"],
+    poemEn: "“Rivers like ribbons of blue silk, hills like hairpins of jade.”",
+    author: "— Han Yu, Tang dynasty",
+    seal: "山河",
+    image: "/card-guilin.jpg",
+    href: "/nature-landscape",
+  },
+  {
+    en: "The Silk Road",
+    cn: "千年文脉",
+    places: "Dunhuang · Zhangye · Jiayuguan · Turpan",
+    poemCn: ["大漠孤烟直", "长河落日圆"],
+    poemEn:
+      "“Lone smoke rises straight from the vast desert; over the long river, the sun sets round.”",
+    author: "— Wang Wei, Tang dynasty",
+    seal: "丝路",
+    image: "/card-dunhuang-mural.jpg",
+    href: "/silkroad",
+  },
+  {
+    en: "Living Heritage",
+    cn: "烟火人间",
+    places: "Beijing · Xi’an · Suzhou · Pingyao",
+    poemCn: ["君到姑苏见", "人家尽枕河"],
+    poemEn: "“Come to Suzhou, and find every house pillowed upon the water.”",
+    author: "— Du Xunhe, Tang dynasty",
+    seal: "人间",
+    image: "/card-suzhou.jpg",
+    href: "/history-culture",
+  },
+  {
+    en: "Modern Cities",
+    cn: "都市万象",
+    places: "Shanghai · Shenzhen · Chongqing · Guangzhou",
+    poemCn: ["危楼高百尺", "手可摘星辰"],
+    poemEn: "“Towers rise a hundred feet — one could pluck the stars by hand.”",
+    author: "— Li Bai, Tang dynasty",
+    seal: "都市",
+    image: "/card-lujiazui-night.jpg",
+    href: "/modern-city",
+  },
 ];
 
 export default function HomePage() {
   return (
-    <>
-      {/* ── Hero Slideshow ──────────────────────────────────────────────── */}
-      <HeroSlideshow />
+    <main className="relative paper-grain" style={{ background: "var(--color-bg)" }}>
+      {/* ── Intro — English-led, with a Chinese seal & calligraphic accent ── */}
+      <section className="relative z-[1] min-h-screen flex flex-col items-center justify-center text-center px-6">
+        <p
+          className="ink-spread font-body text-[11px] tracking-[0.5em] uppercase mb-8"
+          style={{ color: "var(--color-text-muted)" }}
+        >
+          China Compass
+        </p>
 
-      {/* ── Four Chapters Grid ─────────────────────────────────────────── */}
-      <SectionShell>
-        <SectionHeader
-          eyebrow="Four Journeys · 四大旅程"
-          title="Choose Your China"
-          subtitle="Every traveller finds a different China. Which story calls to you?"
-          align="center"
-        />
+        <h1
+          className="ink-spread font-display leading-[1.08]"
+          style={{
+            fontSize: "clamp(2.6rem, 6.5vw, 6rem)",
+            color: "var(--color-text-primary)",
+            animationDelay: "0.15s",
+          }}
+        >
+          A Traveller’s China
+        </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6">
-          {CHAPTERS.map((ch, i) => (
-            <FadeReveal key={ch.id} variant="fadeUp" delay={i * 0.1}>
-              <ChapterCard chapter={ch} />
-            </FadeReveal>
-          ))}
+        {/* Chinese accent + seal */}
+        <div
+          className="ink-spread mt-7 flex items-center justify-center gap-4"
+          style={{ animationDelay: "0.35s" }}
+        >
+          <span className="block w-8 h-px" style={{ background: "var(--color-border-strong)" }} />
+          <span className="font-song text-lg tracking-[0.3em]" style={{ color: "var(--color-text-secondary)" }}>
+            江山入画
+          </span>
+          <span
+            className="seal"
+            style={{ width: 34, height: 34, fontSize: "0.8rem", writingMode: "vertical-rl", padding: "3px 0" }}
+          >
+            卧游
+          </span>
+          <span className="block w-8 h-px" style={{ background: "var(--color-border-strong)" }} />
         </div>
-      </SectionShell>
 
-      {/* ── Stats Strip ────────────────────────────────────────────────── */}
-      <div
-        className="border-y"
-        style={{
-          borderColor: "rgba(200,169,110,0.12)",
-          background: "rgba(200,169,110,0.03)",
-        }}
-      >
-        <div className="mx-auto max-w-screen-xl px-6 md:px-10 py-10 md:py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
-            {STATS.map((s, i) => (
-              <FadeReveal key={s.label} variant="fadeUp" delay={i * 0.08}>
-                <p
-                  className="font-display text-3xl md:text-4xl xl:text-5xl leading-none mb-2"
-                  style={{ color: "var(--color-accent, #c8a96e)" }}
-                >
-                  {s.value}
-                </p>
-                <p
-                  className="font-body text-[10px] tracking-[0.25em] uppercase"
-                  style={{ color: "var(--color-text-muted, #5a5a55)" }}
-                >
-                  {s.label}
-                </p>
-              </FadeReveal>
-            ))}
-          </div>
-        </div>
+        <p
+          className="ink-spread font-sub italic mt-8 max-w-xl leading-relaxed"
+          style={{ fontSize: "clamp(1rem,1.6vw,1.25rem)", color: "var(--color-text-secondary)", animationDelay: "0.5s" }}
+        >
+          A guide for travellers to the Middle Kingdom — its landscapes, ancient
+          routes, living heritage and restless modern cities, told with a
+          painter’s eye.
+        </p>
+
+        <p
+          className="ink-spread font-body text-[10px] tracking-[0.4em] uppercase mt-12"
+          style={{ color: "var(--color-text-muted)", animationDelay: "0.7s" }}
+        >
+          Scroll to explore ↓
+        </p>
+      </section>
+
+      {/* ── Four journeys ──────────────────────────────────────────────── */}
+      <div className="relative z-[1] mx-auto max-w-6xl px-6 md:px-10 pb-32 space-y-28 md:space-y-36">
+        {CHAPTERS.map((c, i) => (
+          <ChapterRow key={c.href} chapter={c} index={i} flip={i % 2 === 1} />
+        ))}
       </div>
 
-      {/* ── Editorial Quote ─────────────────────────────────────────────── */}
-      <SectionShell narrow>
-        <FadeReveal variant="fadeIn" delay={0.1}>
-          <div className="text-center space-y-6 py-4 xl:space-y-8 xl:py-8">
-            <Divider
-              className="mx-auto"
-              width="w-8"
-              style={{ color: "var(--color-accent, #c8a96e)" }}
-            />
-            <blockquote
-              className="font-sub italic text-xl md:text-2xl xl:text-3xl leading-relaxed"
-              style={{ color: "var(--color-text-secondary, #a0a09a)" }}
-            >
-              &ldquo;To travel in China is to read civilisation in three dimensions — where ancient
-              ritual and electric tomorrow share the same street corner.&rdquo;
-            </blockquote>
-            <p
-              className="font-body text-[10px] tracking-[0.3em] uppercase"
-              style={{ color: "var(--color-text-muted, #5a5a55)" }}
-            >
-              China Compass · Editorial
-            </p>
-            <Divider
-              className="mx-auto"
-              width="w-8"
-              style={{ color: "var(--color-accent, #c8a96e)" }}
-            />
-          </div>
-        </FadeReveal>
-      </SectionShell>
-    </>
+      {/* ── Closing colophon ───────────────────────────────────────────── */}
+      <section className="relative z-[1] flex flex-col items-center gap-5 pb-28 px-6 text-center">
+        <span className="block w-10 h-px" style={{ background: "var(--color-accent)" }} />
+        <p
+          className="font-sub italic text-base md:text-lg leading-relaxed max-w-lg"
+          style={{ color: "var(--color-text-secondary)" }}
+        >
+          Four journeys, one civilisation. Choose where your China begins.
+        </p>
+      </section>
+    </main>
   );
 }
 
-function ChapterCard({ chapter }: { chapter: (typeof CHAPTERS)[number] }) {
-  const accentStyle: CSSProperties = { color: chapter.accent };
-
+/* One journey: a mounted painting + an English-led caption with a Chinese
+   calligraphic inscription and vermillion seal. */
+function ChapterRow({ chapter, index, flip }: { chapter: Chapter; index: number; flip: boolean }) {
   return (
-    <Link href={chapter.href} className="block group">
-      <CinematicPhoto
-        gradient={chapter.gradient}
-        className="aspect-video lg:aspect-[16/10] w-full rounded-xl"
-        grain
-        grainOpacity={0.045}
-        vignette
-        overlayDark={0.1}
+    <Link
+      href={chapter.href}
+      className="ink-spread group block"
+      style={{ animationDelay: `${0.1 + index * 0.05}s` }}
+    >
+      <div
+        className={`flex flex-col ${flip ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-10 md:gap-16`}
       >
-        <div className="absolute inset-0 flex flex-col justify-end p-6" style={{ zIndex: 6 }}>
-          {/* Text legibility gradient */}
+        {/* Mounted painting */}
+        <div className="w-full md:w-[56%] flex-shrink-0">
           <div
-            className="absolute inset-x-0 bottom-0 h-3/4 pointer-events-none rounded-b-xl"
+            className="relative transition-transform duration-700 group-hover:-translate-y-1"
             style={{
-              background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 100%)",
+              padding: "10px",
+              background: "var(--color-surface)",
+              border: "1px solid var(--color-border)",
+              boxShadow: "0 10px 34px -14px rgba(43,38,34,0.4)",
             }}
-          />
+          >
+            <div
+              className="relative aspect-[3/2] w-full overflow-hidden"
+              style={{
+                backgroundImage: `url('${chapter.image}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                filter: "saturate(0.94)",
+              }}
+            />
+          </div>
+        </div>
 
-          <div className="relative space-y-2">
-            <p
-              className="font-body text-[9px] tracking-[0.3em] uppercase"
-              style={{ color: "rgba(255,255,255,0.35)" }}
-            >
-              {chapter.chapter}
+        {/* Caption — English-led */}
+        <div className="w-full md:w-[44%] flex items-start gap-6">
+          {/* decorative vertical Chinese inscription (the "题画诗") */}
+          <div className="hidden sm:flex items-start gap-2 pt-1" aria-hidden="true">
+            <p className="vertical font-song text-sm leading-loose" style={{ color: "var(--color-text-muted)", letterSpacing: "0.22em" }}>
+              {chapter.poemCn[0]}
+            </p>
+            <p className="vertical font-song text-sm leading-loose" style={{ color: "var(--color-text-muted)", letterSpacing: "0.22em" }}>
+              {chapter.poemCn[1]}
+            </p>
+          </div>
+
+          {/* English content */}
+          <div className="flex flex-col gap-3">
+            <p className="font-body text-[10px] tracking-[0.3em] uppercase" style={{ color: "var(--color-text-muted)" }}>
+              {chapter.places}
             </p>
 
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <h3
-                  className="font-display text-2xl md:text-3xl leading-tight"
-                  style={{ color: "#f2ece2" }}
-                >
-                  {chapter.title}
-                </h3>
-                <span
-                  className="font-sub italic text-sm"
-                  style={{ color: "rgba(255,255,255,0.42)" }}
-                >
-                  {chapter.subtitle}
-                </span>
-              </div>
+            <h2
+              className="font-display leading-tight"
+              style={{ fontSize: "clamp(1.9rem,3vw,2.6rem)", color: "var(--color-text-primary)" }}
+            >
+              {chapter.en}
+            </h2>
 
-              <div
-                className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1"
-                style={accentStyle}
+            {/* Chinese name + seal */}
+            <div className="flex items-center gap-3">
+              <span className="font-song text-xl tracking-[0.2em]" style={{ color: "var(--color-text-secondary)" }}>
+                {chapter.cn}
+              </span>
+              <span
+                className="seal"
+                style={{ width: 30, height: 30, fontSize: "0.72rem", writingMode: "vertical-rl", padding: "2px 0" }}
               >
-                <span className="font-body text-[9px] tracking-[0.25em] uppercase">Explore</span>
-                <ArrowUpRight size={12} strokeWidth={2} />
-              </div>
+                {chapter.seal}
+              </span>
             </div>
 
+            {/* Translated poem — the "意境", made legible */}
             <p
-              className="font-body text-xs leading-relaxed max-w-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 pt-1"
-              style={{ color: "rgba(255,255,255,0.52)" }}
+              className="font-sub italic leading-relaxed mt-1 max-w-sm"
+              style={{ fontSize: "0.98rem", color: "var(--color-text-secondary)" }}
             >
-              {chapter.tagline}
+              {chapter.poemEn}
+            </p>
+            <p className="font-body text-[10px] tracking-[0.15em]" style={{ color: "var(--color-text-muted)" }}>
+              {chapter.author}
+            </p>
+
+            <p
+              className="font-body text-[11px] tracking-[0.3em] uppercase mt-3 transition-colors duration-500 group-hover:text-[color:var(--color-accent)]"
+              style={{ color: "var(--color-text-primary)" }}
+            >
+              Explore this journey ↗
             </p>
           </div>
         </div>
-      </CinematicPhoto>
+      </div>
     </Link>
   );
 }

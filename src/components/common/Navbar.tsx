@@ -20,6 +20,10 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme } = useTheme();
 
+  /* Homepage uses the centred 4-card grid as primary navigation,
+     so the inline theme links are hidden there. */
+  const isHome = pathname === "/";
+
   return (
     <>
       <motion.header
@@ -38,8 +42,8 @@ export default function Navbar() {
               China Compass
             </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-6 flex-1 justify-center">
+            {/* Desktop Nav — hidden on the homepage (cards are the nav there) */}
+            <nav className={`${isHome ? "hidden" : "hidden md:flex"} items-center gap-6 flex-1 justify-center`}>
               {NAV_THEMES.map((id) => {
                 const route = THEME_ROUTES[id];
                 const active = pathname === route || theme === id;
@@ -50,19 +54,19 @@ export default function Navbar() {
                     className="font-body text-sm tracking-[0.5px] uppercase transition-all duration-300 whitespace-nowrap"
                     style={{
                       color: active
-                        ? "var(--color-accent, #c8a96e)"
-                        : "rgba(255,255,255,0.45)",
+                        ? "var(--color-accent)"
+                        : "var(--color-text-muted)",
                       opacity: active ? 1 : undefined,
                     }}
                     onMouseEnter={(e) =>
                       !active &&
                       ((e.target as HTMLElement).style.color =
-                        "rgba(255,255,255,0.75)")
+                        "var(--color-text-primary)")
                     }
                     onMouseLeave={(e) =>
                       !active &&
                       ((e.target as HTMLElement).style.color =
-                        "rgba(255,255,255,0.45)")
+                        "var(--color-text-muted)")
                     }
                   >
                     {THEME_LABELS[id]}
@@ -76,7 +80,7 @@ export default function Navbar() {
               {/* Mobile Toggle — 48×48 touch target */}
               <button
                 className="md:hidden transition-colors duration-300 flex items-center justify-center min-h-[48px] min-w-[48px] -mr-3"
-                style={{ color: "rgba(255,255,255,0.7)" }}
+                style={{ color: "var(--color-text-primary)" }}
                 onClick={() => setMenuOpen((v) => !v)}
                 aria-label="Toggle menu"
               >

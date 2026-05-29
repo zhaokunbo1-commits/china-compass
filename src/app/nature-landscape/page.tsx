@@ -1,27 +1,13 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
-import Image from "next/image";
-import FadeReveal from "@/components/cinematic/FadeReveal";
-import FilmGrain from "@/components/cinematic/FilmGrain";
 import SectionShell from "@/components/sections/SectionShell";
-import SectionHeader from "@/components/sections/SectionHeader";
+import ChapterHeader from "@/components/sections/ChapterHeader";
 import DestinationCard from "@/components/sections/DestinationCard";
-import TravelGuide from "@/components/sections/TravelGuide";
-import type { GuideTip } from "@/components/sections/TravelGuide";
-import Divider from "@/components/common/Divider";
 
 export const metadata: Metadata = {
-  title: "Nature & Landscape — China Compass",
+  title: "Nature & Landscape · Destinations — China Compass",
   description:
     "Zhangjiajie's floating mountains, Guilin's karst rivers, Tibet's plateau monasteries, and Xinjiang's endless steppe — China's wild earth in four chapters.",
 };
-
-const HERO_GRADIENT = [
-  "radial-gradient(ellipse 80% 58% at 28% 66%, rgba(50,128,75,0.65) 0%, transparent 55%)",
-  "radial-gradient(ellipse 60% 40% at 72% 20%, rgba(75,160,110,0.35) 0%, transparent 50%)",
-  "radial-gradient(ellipse 40% 30% at 85% 75%, rgba(40,105,65,0.28) 0%, transparent 45%)",
-  "linear-gradient(175deg, #071109 0%, #102815 25%, #1C4025 48%, #26502F 60%, #112616 78%, #060C07 100%)",
-].join(",");
 
 const DESTINATIONS = [
   {
@@ -71,255 +57,24 @@ const DESTINATIONS = [
   },
 ];
 
-const EXPERIENCES = [
-  {
-    title: "Zhangjiajie Glass Bridge & Avatar Trail",
-    description:
-      "Cross the world's longest and highest glass-bottomed bridge (430 metres, 300 metres above the valley), then take the Bailong Elevator — the world's tallest outdoor lift — to the plateau trail above the pillars.",
-  },
-  {
-    title: "Guilin Li River Bamboo Raft at Dawn",
-    description:
-      "Depart Yangshuo before 6am on a bamboo raft. As mist lifts off the water and the karst silhouettes emerge, you float through a landscape that has been called the most beautiful river valley on earth.",
-  },
-  {
-    title: "Tibet: Namtso Lake Sunrise",
-    description:
-      "Spend the night at a guesthouse on the shore of Namtso (4,718m). At first light, the Nyenchen Tanglha peaks glow pink across 70 kilometres of glacial water. No photograph prepares you.",
-  },
-  {
-    title: "Xinjiang Nalati Grassland Horse Trek",
-    description:
-      "Ride Kazakh horses across the Nalati grasslands in the Tianshan Mountains. Your guide — a third-generation nomadic herder — points out summer pastures his family has used for a hundred years.",
-  },
-];
-
-const GUIDE_TIPS: GuideTip[] = [
-  {
-    iconName: "Mountain",
-    title: "Best Season",
-    points: [
-      "Zhangjiajie: spring mist (April–May) and autumn colour (October–November) are magical",
-      "Guilin: September–October for lowest rainfall and clearest Li River reflections",
-      "Tibet: May–October only — road and air access closes in winter snowstorms",
-      "Xinjiang: June–September for grasslands and Tianshan lakes; July for wildflower peaks",
-    ],
-  },
-  {
-    iconName: "Heart",
-    title: "Altitude Safety",
-    points: [
-      "Tibet sits at 3,650m (Lhasa) to 5,000m+ — altitude sickness is a real risk",
-      "Spend 2–3 days at lower altitude (Chengdu or Kunming) before flying to Tibet",
-      "Avoid alcohol and strenuous exertion for the first 48 hours at altitude",
-      "Acetazolamide (Diamox) helps; consult your doctor 2 weeks before departure",
-    ],
-  },
-  {
-    iconName: "Map",
-    title: "Permits Required",
-    points: [
-      "Tibet requires a Tibet Travel Permit (TTB) — arranged through a licensed tour operator",
-      "Additional Alien Travel Permit needed for areas outside Lhasa (Namtso, Everest Base Camp)",
-      "Apply at least 3 weeks before travel; individual travellers cannot enter Tibet independently",
-      "Xinjiang: no special permit for most areas, but registration at hotels is strictly enforced",
-    ],
-  },
-  {
-    iconName: "Footprints",
-    title: "Physical Preparation",
-    points: [
-      "Zhangjiajie: main trails involve 3–6 hours walking; glass bridge requires good head for heights",
-      "Guilin: Li River rafts are gentle; Longji Rice Terraces involve 2 hours of steep steps",
-      "Tibet: even flat walking at altitude is harder than it seems — pace yourself",
-      "Xinjiang horse treks suit beginner riders; no experience required for Nalati day rides",
-    ],
-  },
-  {
-    iconName: "CloudRain",
-    title: "Weather & Gear",
-    points: [
-      "Mountain weather changes rapidly — pack waterproof jacket year-round",
-      "Zhangjiajie: rain gear essential even in summer; mist makes wooden boardwalks slippery",
-      "Tibet: UV index is extreme at altitude — SPF 50+ and UV-blocking sunglasses mandatory",
-      "Xinjiang: temperature drops sharply at night even in summer; always bring a fleece",
-    ],
-  },
-  {
-    iconName: "Wind",
-    title: "Practical Tips",
-    points: [
-      "Buy China National Park pass online to save at multiple scenic area gates",
-      "Book Zhangjiajie accommodation in the park itself — morning trails before tour groups arrive",
-      "Tibet tours must be booked through an authorised agency; solo travel is not permitted",
-      "Guilin: take the Li River cruise from Guilin to Yangshuo (4 hours) rather than the reverse",
-    ],
-  },
-];
-
-const accent = "#68a888";
-const accentStyle: CSSProperties = { color: accent };
-
 export default function NatureLandscapePage() {
   return (
-    <>
-      {/* ── Cinematic Hero ─────────────────────────────────────────────── */}
-      <div className="relative overflow-hidden" style={{ width: "100vw", minHeight: "100vh", position: "relative" }}>
-
-        {/* Zhangjiajie — contrast +5%, breathing brightness */}
-        <div
-          aria-hidden="true"
-          className="hero-bg absolute inset-0"
-          style={{ animation: "nature-breathe 12s ease-in-out infinite", zIndex: 1 }}
-        >
-          <Image
-            src="/zhangjiajie-nature.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            quality={100}
-            className="object-cover"
-            style={{ objectPosition: "center" }}
-          />
-        </div>
-
-        {/* Soft vignette — edges only, keeps centre bright */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.25) 100%)",
-            zIndex: 8,
-          }}
+    <div className="relative paper-grain min-h-screen">
+      <SectionShell className="pt-28 md:pt-32">
+        <ChapterHeader
+          en="Splendid Landscapes"
+          cn="锦绣山河"
+          places="Zhangjiajie · Guilin · Tibet · Xinjiang"
+          poemEn="“Rivers like ribbons of blue silk, hills like hairpins of jade.”"
+          author="— Han Yu, Tang dynasty"
+          seal="山河"
         />
-        {/* Title legibility gradient — bottom only */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-1/2 pointer-events-none"
-          style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 60%)",
-            zIndex: 8,
-          }}
-        />
-        <FilmGrain opacity={0.038} />
-
-        <div
-          className="hero-stage absolute inset-0 flex flex-col items-center justify-end pb-[clamp(3rem,8vh,6rem)] px-6 md:px-10"
-          style={{ zIndex: 10 }}
-        >
-          <FadeReveal variant="fadeUp" delay={0.15} className="hero-copy space-y-5 max-w-3xl w-full text-center">
-            <p
-              className="font-body text-[10px] tracking-[0.35em] uppercase"
-              style={{ color: "rgba(255,255,255,0.40)" }}
-            >
-              Chapter IV &nbsp;·&nbsp; Zhangjiajie · Guilin · Tibet · Xinjiang
-            </p>
-
-            <h1
-              className="hero-title font-display leading-none"
-              style={{
-                color: "#e6f0ea",
-                textShadow: "0 2px 4px rgba(0,0,0,0.3), 0 4px 48px rgba(0,0,0,0.55)",
-              }}
-            >
-              Nature &amp; Landscape
-            </h1>
-
-            <div className="flex items-center justify-center gap-4">
-              <Divider width="w-10" style={accentStyle} />
-              <span
-                className="hero-subtitle font-sub italic"
-                style={{ color: "rgba(255,255,255,0.48)" }}
-              >
-                山河秘境
-              </span>
-            </div>
-
-            <p
-              className="font-sub italic text-lg md:text-xl leading-relaxed max-w-lg mx-auto"
-              style={{ color: "rgba(255,255,255,0.56)" }}
-            >
-              &ldquo;Where the earth sculpted cathedrals from mist and stone — landscapes so vast
-              they make silence feel inhabited.&rdquo;
-            </p>
-          </FadeReveal>
-        </div>
-      </div>
-
-      {/* ── Destinations ───────────────────────────────────────────────── */}
-      <SectionShell>
-        <SectionHeader
-          eyebrow="Destinations · 目的地"
-          title="The Earth at Its Most Dramatic"
-          subtitle="Four landscapes that challenge every previous idea you had about what nature looks like."
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7">
           {DESTINATIONS.map((dest, i) => (
             <DestinationCard key={dest.name} {...dest} index={i} />
           ))}
         </div>
       </SectionShell>
-
-      {/* ── Signature Experiences ──────────────────────────────────────── */}
-      <SectionShell
-        className="border-t"
-        style={{ borderColor: `${accent}18` } as CSSProperties}
-      >
-        <SectionHeader
-          eyebrow="Experiences · 体验"
-          title="In the Heart of Wild China"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {EXPERIENCES.map((exp, i) => (
-            <FadeReveal key={exp.title} variant="fadeUp" delay={i * 0.1}>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="w-5 h-px" style={{ background: accent, opacity: 0.6 }} />
-                  <h3
-                    className="font-display text-sm tracking-widest uppercase"
-                    style={{ color: "var(--color-text-primary, #e6f0ea)" }}
-                  >
-                    {exp.title}
-                  </h3>
-                </div>
-                <p
-                  className="font-body text-sm leading-relaxed pl-8"
-                  style={{ color: "var(--color-text-secondary, #90b8a8)" }}
-                >
-                  {exp.description}
-                </p>
-              </div>
-            </FadeReveal>
-          ))}
-        </div>
-      </SectionShell>
-
-      {/* ── Travel Guide ───────────────────────────────────────────────── */}
-      <SectionShell
-        className="border-t"
-        style={{ borderColor: `${accent}18` } as CSSProperties}
-      >
-        <SectionHeader
-          eyebrow="Travel Guide · 旅行指南"
-          title="Before You Go"
-          subtitle="Wilderness demands respect and preparation. These notes could save your trip."
-        />
-        <TravelGuide tips={GUIDE_TIPS} columns={3} />
-      </SectionShell>
-
-      {/* ── Closing Quote ──────────────────────────────────────────────── */}
-      <SectionShell narrow className="border-t" style={{ borderColor: `${accent}18` } as CSSProperties}>
-        <FadeReveal variant="fadeIn">
-          <div className="text-center space-y-6 py-6">
-            <Divider className="mx-auto" width="w-8" style={accentStyle} />
-            <p
-              className="font-sub italic text-lg md:text-xl leading-relaxed"
-              style={{ color: "var(--color-text-secondary, #90b8a8)" }}
-            >
-              &ldquo;The mountains here do not care for your plans. They have been sculpting themselves for two hundred million years. You are simply a guest.&rdquo;
-            </p>
-          </div>
-        </FadeReveal>
-      </SectionShell>
-    </>
+    </div>
   );
 }

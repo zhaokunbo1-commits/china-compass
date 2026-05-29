@@ -22,13 +22,15 @@
   --vignette-strength: 60%;
 }
 
-/* ─── Reset & Base ──────────────────────────────────────────────────────────── */
+/* ─── Reset & Base ──────────────────────────────────────────────────────────
+   NOTE: margin/padding zeroing is handled by Tailwind v4 preflight (which is
+   layered, so utilities like mx-auto / px-6 can override it). Do NOT add an
+   unlayered `* { margin:0; padding:0 }` here — it would beat every Tailwind
+   spacing utility in the cascade. */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
@@ -118,6 +120,63 @@ body {
 .font-body {
   font-family: var(--font-inter), system-ui, sans-serif;
   letter-spacing: var(--letterspace-body);
+}
+
+/* ─── 纸本意境 — Chinese serif, brush, vertical typesetting ─────────────────── */
+.font-song {
+  font-family: var(--font-song), "Songti SC", "STSong", serif;
+  font-weight: 500;
+}
+.font-brush {
+  font-family: var(--font-brush), "Songti SC", cursive;
+}
+/* Vertical (top→bottom, right→left) classical typesetting */
+.vertical {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 0.18em;
+}
+
+/* 宣纸 fibre texture — extremely faint, warm */
+.paper-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  /* Layer 1 = per-theme motif watermark (--motif); Layer 2 = paper fibre */
+  background-image: var(--motif, none),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.40  0 0 0 0 0.34  0 0 0 0 0.25  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23p)'/%3E%3C/svg%3E");
+  background-size: var(--motif-size, 600px), 300px 300px;
+  background-repeat: var(--motif-repeat, no-repeat), repeat;
+  background-position: var(--motif-pos, center), 0 0;
+}
+
+/* 朱砂印 — vermillion seal stamp */
+.seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-brush), serif;
+  color: #f4ece0;
+  background: #a83232;
+  border-radius: 4px;
+  line-height: 1;
+  box-shadow: 0 1px 6px rgba(168, 50, 50, 0.35);
+  /* slightly weathered edges */
+  filter: contrast(1.05);
+}
+
+/* 洇墨 — ink-spread reveal (replaces fade/scale) */
+@keyframes ink-spread {
+  0%   { opacity: 0; clip-path: inset(0 0 100% 0); filter: blur(6px); }
+  60%  { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; clip-path: inset(0 0 0 0); filter: blur(0); }
+}
+.ink-spread {
+  animation: ink-spread 1.6s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 /* ─── Cinematic Layout ─────────────────────────────────────────────────────── */
@@ -218,6 +277,107 @@ body {
 
 .btn-base:active {
   transform: translateY(0);
+}
+
+/* Smooth-scroll target offset so it clears the fixed navbar */
+#explore {
+  scroll-margin-top: 80px;
+}
+
+/* ─── Card photo ken-burns — slow drift-zoom for a "living" still ─────────── */
+@keyframes card-kenburns {
+  0%   { transform: scale(1.04) translate3d(0, 0, 0); }
+  100% { transform: scale(1.14) translate3d(-2.5%, -2%, 0); }
+}
+
+/* ─── Homepage chapter cards — frosted glass + hover float + warm gold glow ── */
+.chapter-card {
+  position: relative;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 24px -8px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.5s var(--anim-curve),
+    box-shadow 0.5s var(--anim-curve),
+    border-color 0.5s var(--anim-curve);
+  will-change: transform;
+}
+/* Frosted-glass sheen across the top edge */
+.chapter-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  pointer-events: none;
+  z-index: 7;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.10) 0%,
+    rgba(255, 255, 255, 0.02) 28%,
+    transparent 55%
+  );
+  opacity: 0.7;
+  transition: opacity 0.5s var(--anim-curve);
+}
+.chapter-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(201, 160, 80, 0.45);
+  box-shadow:
+    0 22px 60px -14px rgba(201, 160, 80, 0.45),
+    0 0 0 1px rgba(201, 160, 80, 0.20);
+}
+.chapter-card:hover::before {
+  opacity: 1;
+}
+/* Touch devices: no hover lift, gentle press feedback instead */
+@media (max-width: 1024px) {
+  .chapter-card:hover {
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 4px 24px -8px rgba(0, 0, 0, 0.5);
+  }
+  .chapter-card:active {
+    transform: scale(0.99);
+  }
+}
+
+/* ─── Hero EXPLORE CTA ─────────────────────────────────────────────────────── */
+.explore-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;                 /* touch-friendly target */
+  padding: 0.85rem 2.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 9999px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 0.35s var(--anim-curve),
+    color 0.35s var(--anim-curve),
+    border-color 0.35s var(--anim-curve);
+}
+.explore-cta:hover {
+  background: rgba(255, 255, 255, 0.85);
+  color: #14110c;
+  border-color: transparent;
+}
+.explore-cta:active {
+  background: rgba(255, 255, 255, 0.7);
+  color: #14110c;
+}
+/* Scale down proportionally on mobile while keeping ≥48px touch height */
+@media (max-width: 768px) {
+  .explore-cta {
+    padding: 0.7rem 1.8rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.24em;
+  }
 }
 
 /* ─── Divider ──────────────────────────────────────────────────────────────── */
